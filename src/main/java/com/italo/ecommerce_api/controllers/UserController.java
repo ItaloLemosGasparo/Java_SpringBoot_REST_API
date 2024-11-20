@@ -2,14 +2,8 @@ package com.italo.ecommerce_api.controllers;
 
 import com.italo.ecommerce_api.models.User;
 import com.italo.ecommerce_api.services.UserService;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,42 +13,53 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
-    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     private UserService userService;
 
+    //Insert
     @PostMapping
     public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
-        logger.info("Creating user with email: {}", user.getEmail());
-
         User createdUser = userService.createUser(user);
-
-        logger.info("User created successfully with ID: {}", createdUser.getId());
-        
         return ResponseEntity.status(201).body(createdUser);
     }
+    //Insert
 
+    //Select
     @GetMapping
     public ResponseEntity<List<User>> getUsers() {
-        logger.info("Fetching all users...");
         List<User> users = userService.getUsers();
 
-        if (users.isEmpty()) {
-            logger.warn("No users found");
+        if (users.isEmpty())
             return ResponseEntity.noContent().build();
-        }
 
-        logger.info("Fetched {} users", users.size());
         return ResponseEntity.ok(users);
     }
 
-    @GetMapping("/{email}")
+    @GetMapping("/name/{name}")
+    public ResponseEntity<List<User>> getUsersByName(@PathVariable String name) {
+        List<User> users = userService.getUsersByName(name);
+
+        if (users.isEmpty())
+            return ResponseEntity.notFound().build();
+
+        return ResponseEntity.ok(users);
+    }
+
+    @GetMapping("/name/single/{name}")
+    public ResponseEntity<User> getUserByName(@PathVariable String name) {
+        Optional<User> user = userService.getUserByName(name);
+        return user.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/email/{email}")
     public ResponseEntity<User> getUserByEmail(@PathVariable String email) {
         Optional<User> user = userService.getUserByEmail(email);
         return user.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
+    //Select
 
+    //Update
     @PutMapping("/{email}")
     public ResponseEntity<User> updateUserByEmail(@PathVariable String email, @Valid @RequestBody User updatedUser) {
         Optional<User> existingUser = userService.getUserByEmail(email);
@@ -76,7 +81,9 @@ public class UserController {
         User updatedUser = userService.updateUser(existingUser.get(), partialUpdate);
         return ResponseEntity.ok(updatedUser);
     }
+    //Update
 
+    //Delete
     @DeleteMapping("/{email}")
     public ResponseEntity<Void> deleteUserByEmail(@PathVariable String email) {
         Optional<User> user = userService.getUserByEmail(email);
@@ -87,4 +94,5 @@ public class UserController {
         userService.deleteUserById(user.get().getId());
         return ResponseEntity.noContent().build();
     }
+    //Delete
 }

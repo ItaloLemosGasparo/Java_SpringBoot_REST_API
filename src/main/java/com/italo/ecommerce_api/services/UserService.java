@@ -30,6 +30,14 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    public List<User> getUsersByName(String name) {
+        return userRepository.findAllByNameContainingIgnoreCase(name);
+    }
+
+    public Optional<User> getUserByName(String name) {
+        return userRepository.findByNameContainingIgnoreCase(name);
+    }
+
     public Optional<User> getUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
@@ -40,33 +48,32 @@ public class UserService {
 
     @Transactional
     public User updateUser(User existingUser, User updatedUser) {
-        if (updatedUser.getName() != null) {
+        if (updatedUser.getName() != null)
             existingUser.setName(updatedUser.getName());
-        }
-        if (updatedUser.getEmail() != null) {
+
+        if (updatedUser.getEmail() != null)
             existingUser.setEmail(updatedUser.getEmail());
-        }
-        if (updatedUser.getPassword() != null) {
+
+        if (updatedUser.getPassword() != null)
             existingUser.setPassword(passwordEncoder.encode(updatedUser.getPassword()));
-        }
-        if (updatedUser.getCpf() != null) {
+
+        if (updatedUser.getCpf() != null)
             existingUser.setCpf(updatedUser.getCpf());
-        }
-        if (updatedUser.getBirthDate() != null) {
+
+        if (updatedUser.getBirthDate() != null)
             existingUser.setBirthDate(updatedUser.getBirthDate());
-        }
-        if (updatedUser.getPhone() != null) {
+
+        if (updatedUser.getPhone() != null)
             existingUser.setPhone(updatedUser.getPhone());
-        }
-        if (updatedUser.getAddress() != null) {
+
+        if (updatedUser.getAddress() != null)
             existingUser.setAddress(updatedUser.getAddress());
-        }
-        if (updatedUser.getUserType() != null) {
+
+        if (updatedUser.getUserType() != null)
             existingUser.setUserType(updatedUser.getUserType());
-        }
-        if (updatedUser.getActive() != null) {
+
+        if (updatedUser.getActive() != null)
             existingUser.setActive(updatedUser.getActive());
-        }
 
         return userRepository.save(existingUser);
     }

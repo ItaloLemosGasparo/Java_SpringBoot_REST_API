@@ -4,6 +4,7 @@ import com.italo.ecommerce_api.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -25,6 +26,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     // Metodos adicionais:
     Optional<User> findByEmail(String email);
+    Optional<User> findByNameContainingIgnoreCase(String name);
+    List<User> findAllByNameContainingIgnoreCase(String name);
     // Este é um metodo personalizado que não faz parte dos métodos padrão do JpaRepository.
     // - Será implementado automaticamente pelo Spring Data JPA com base na convenção de nomes.
     // - "findByUsername": O Spring Data JPA entende que deve criar uma consulta para buscar um registro
