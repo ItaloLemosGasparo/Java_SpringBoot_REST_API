@@ -23,15 +23,18 @@ public class UserController {
     @Autowired
     private UserMapper userMapper;
 
-    //Insert
+    //Create User
     @PostMapping
-    public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
+    public ResponseEntity<UserDTO> createUser(@Valid @RequestBody User user) {
+        //a criptogarfia da senha esta no userService.createUser
         User createdUser = userService.createUser(user);
-        return ResponseEntity.status(201).body(createdUser);
-    }
-    //Insert
 
-    //Select
+        UserDTO userDTO = userMapper.toDto(createdUser);
+        return ResponseEntity.status(201).body(userDTO);
+    }
+
+
+    //Get All Users
     @GetMapping
     public ResponseEntity<List<UserDTO>> getUsers() {
         List<User> users = userService.getUsers();
@@ -40,12 +43,13 @@ public class UserController {
             return ResponseEntity.noContent().build();
 
         List<UserDTO> userDTOs = users.stream()
-                .map(user -> userMapper.toUserDTO(user))
+                .map(userMapper::toDto)  // Mapeia diretamente para o DTO
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok(userDTOs);
     }
 
+    //Get User by Name
     @GetMapping("/name/{name}")
     public ResponseEntity<List<UserDTO>> getUsersByName(@PathVariable String name) {
         List<User> users = userService.getUsersByName(name);
@@ -54,12 +58,13 @@ public class UserController {
             return ResponseEntity.notFound().build();
 
         List<UserDTO> userDTOs = users.stream()
-                .map(user -> userMapper.toUserDTO(user))
+                .map(userMapper::toDto)
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok(userDTOs);
     }
 
+    //Get Single User by Name
     @GetMapping("/name/single/{name}")
     public ResponseEntity<UserDTO> getUserByName(@PathVariable String name) {
         Optional<User> user = userService.getUserByName(name);
@@ -67,10 +72,10 @@ public class UserController {
         if (user.isEmpty())
             return ResponseEntity.notFound().build();
 
-        return ResponseEntity.ok(userMapper.toUserDTO(user.get()));
+        return ResponseEntity.ok(userMapper.toDto(user.get()));  // Retorna o DTO
     }
 
-
+    //Get Single User by Email
     @GetMapping("/email/{email}")
     public ResponseEntity<UserDTO> getUserByEmail(@PathVariable String email) {
         Optional<User> user = userService.getUserByEmail(email);
@@ -78,33 +83,36 @@ public class UserController {
         if (user.isEmpty())
             return ResponseEntity.notFound().build();
 
-        return ResponseEntity.ok(userMapper.toUserDTO(user.get()));
+        return ResponseEntity.ok(userMapper.toDto(user.get()));  // Retorna o DTO
     }
-    //Select
 
-    //Update
+    //Update User by Email (full update)
     @PutMapping("/email/{email}")
-    public ResponseEntity<User> updateUserByEmail(@PathVariable String email, @Valid @RequestBody UserDTO updatedUser) {
+    public ResponseEntity<UserDTO> updateUserByEmail(@PathVariable String email, @Valid @RequestBody UserDTO updatedUserDTO) {
         Optional<User> existingUser = userService.getUserByEmail(email);
 
         if (existingUser.isEmpty())
             return ResponseEntity.notFound().build();
 
-        return ResponseEntity.ok(userService.updateUser(existingUser.get(), userMapper.toUser(updatedUser)));
+        User updatedUser = userMapper.toEntity(updatedUserDTO);
+        User savedUser = userService.updateUser(existingUser.get(), updatedUser);
+        return ResponseEntity.ok(userMapper.toDto(savedUser));  // Retorna o DTO atualizado
     }
 
+    //Partial Update (patch)
     @PatchMapping("/email/{email}")
-    public ResponseEntity<User> patchUserByEmail(@PathVariable String email, @RequestBody UserDTO partialUpdatedUser) {
+    public ResponseEntity<UserDTO> patchUserByEmail(@PathVariable String email, @RequestBody UserDTO partialUpdatedUserDTO) {
         Optional<User> existingUser = userService.getUserByEmail(email);
 
         if (existingUser.isEmpty())
             return ResponseEntity.notFound().build();
 
-        return ResponseEntity.ok(userService.updateUser(existingUser.get(), userMapper.toUser(partialUpdatedUser)));
+        User partialUpdatedUser = userMapper.toEntity(partialUpdatedUserDTO);
+        User savedUser = userService.updateUser(existingUser.get(), partialUpdatedUser);
+        return ResponseEntity.ok(userMapper.toDto(savedUser));  // Retorna o DTO atualizado
     }
-    //Update
 
-    //Delete
+    //Delete User by Email
     @DeleteMapping("/email/{email}")
     public ResponseEntity<Void> deleteUserByEmail(@PathVariable String email) {
         Optional<User> userToDelete = userService.getUserByEmail(email);
@@ -115,5 +123,4 @@ public class UserController {
         userService.deleteUserById(userToDelete.get().getId());
         return ResponseEntity.noContent().build();
     }
-    //Delete
 }

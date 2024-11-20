@@ -3,7 +3,6 @@ package com.italo.ecommerce_api.services;
 import com.italo.ecommerce_api.models.user.User;
 import com.italo.ecommerce_api.repositories.UserRepository;
 import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -21,8 +20,9 @@ public class UserService {
     private PasswordEncoder passwordEncoder;
 
     @Transactional
-    public User createUser(@Valid User user) {
+    public User createUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+
         return userRepository.save(user);
     }
 
