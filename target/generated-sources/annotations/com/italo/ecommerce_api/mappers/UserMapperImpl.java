@@ -1,16 +1,16 @@
 package com.italo.ecommerce_api.mappers;
 
 import com.italo.ecommerce_api.dtos.UserDTO;
-import com.italo.ecommerce_api.models.Address;
-import com.italo.ecommerce_api.models.User;
-import com.italo.ecommerce_api.models.UserType;
+import com.italo.ecommerce_api.models.user.Address;
+import com.italo.ecommerce_api.models.user.User;
+import com.italo.ecommerce_api.models.user.UserType;
 import java.time.LocalDate;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-11-20T14:06:03-0300",
+    date = "2024-11-20T15:17:37-0300",
     comments = "version: 1.5.3.Final, compiler: javac, environment: Java 23.0.1 (Oracle Corporation)"
 )
 @Component

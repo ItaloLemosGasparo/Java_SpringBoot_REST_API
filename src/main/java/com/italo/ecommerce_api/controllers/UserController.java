@@ -1,7 +1,7 @@
 package com.italo.ecommerce_api.controllers;
 
 import com.italo.ecommerce_api.dtos.UserDTO;
-import com.italo.ecommerce_api.models.User;
+import com.italo.ecommerce_api.models.user.User;
 import com.italo.ecommerce_api.services.UserService;
 import com.italo.ecommerce_api.mappers.UserMapper;
 import jakarta.validation.Valid;

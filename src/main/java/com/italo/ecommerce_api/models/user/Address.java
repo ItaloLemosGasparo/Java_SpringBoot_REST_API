@@ -1,14 +1,19 @@
-package com.italo.ecommerce_api.models;
+package com.italo.ecommerce_api.models.user;
 
-import jakarta.persistence.Embeddable;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
-@Embeddable
+@Entity
+@Table(name = "UserAddresses")
 public class Address {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @NotNull(message = "O logradouro não pode ser nulo.")
     @Size(min = 3, max = 255, message = "O logradouro deve ter entre 3 e 255 caracteres.")
     private String street;
@@ -31,4 +36,7 @@ public class Address {
     @Pattern(regexp = "\\d{8}", message = "O CEP deve conter 8 dígitos.")
     private String zipCode;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 }

@@ -1,7 +1,7 @@
 package com.italo.ecommerce_api.dtos;
 
-import com.italo.ecommerce_api.models.Address;
-import com.italo.ecommerce_api.models.UserType;
+import com.italo.ecommerce_api.models.user.Address;
+import com.italo.ecommerce_api.models.user.UserType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

@@ -1,6 +1,6 @@
 package com.italo.ecommerce_api.repositories;
 
-import com.italo.ecommerce_api.models.User;
+import com.italo.ecommerce_api.models.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

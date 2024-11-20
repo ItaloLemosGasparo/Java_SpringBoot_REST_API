@@ -1,15 +1,18 @@
-package com.italo.ecommerce_api.models;
+package com.italo.ecommerce_api.models.user;
 
 import com.italo.ecommerce_api.validators.ValidCpf;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
-@Data //gera os getter, setter, toString()
+@Data
+@EqualsAndHashCode(exclude = "password")
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,11 +24,12 @@ public class User {
 
     @NotNull(message = "O nome não pode ser nulo.")
     @Size(min = 3, max = 100, message = "O nome deve ter entre 3 e 100 caracteres.")
+    @Column(nullable = false, length = 100)
     private String name;
 
     @NotNull(message = "O email não pode ser nulo.")
     @Email(message = "O email deve ser válido.") // Validação de formato de email.
-    @Column(unique = true)
+    @Column(unique = true, nullable = false, length = 100)
     private String email;
 
     @NotNull(message = "A senha não pode ser nula.")
@@ -33,41 +37,40 @@ public class User {
 
     @NotNull(message = "O CPF não pode ser nulo.")
     @Column(unique = true)
-    @ValidCpf
+    @ValidCpf(message = "CPF inválido.")// Validação de formato de email.
     private String cpf;
 
-
     @NotNull(message = "A data de nascimento não pode ser nula.")
-    @Past(message = "A data de nascimento deve ser uma data passada.") // Validação para garantir que a data seja no passado.
+    @Past(message = "A data de nascimento deve ser uma data passada.")
     private LocalDate birthDate;
 
     @NotNull(message = "O telefone não pode ser nulo.")
-    @Pattern(regexp = "\\d{10,11}", message = "O telefone deve conter 10 ou 11 dígitos.")
+    @Pattern(regexp = "\\(\\d{2}\\) \\d{4,5}-\\d{4}", message = "O telefone deve ter o formato (XX) XXXX-XXXX ou (XX) XXXXX-XXXX.")
     private String phone;
 
-    @Embedded // Indica que a classe Address será incorporada diretamente como parte desta entidade.
-    private Address address;
+    @OneToMany(mappedBy = "user")
+    private List<Address> address;
 
-    @Enumerated(EnumType.STRING) // Armazena o enum como string no banco de dados.
-    @NotNull(message = "O tipo de usuário não pode ser nulo.")
+    @ManyToOne
+    @JoinColumn(name = "user_type_id", nullable = false)
     private UserType userType;
 
-    private Boolean active = true; // Indica se o usuário está ativo. Valor padrão definido como true.
+    private Boolean active = true;
 
     @NotNull(message = "A data de criação não pode ser nula.")
-    @PastOrPresent(message = "A data de criação deve ser no passado ou presente.") // Garante que a data de criação seja válida.
+    @PastOrPresent(message = "A data de criação deve ser no passado ou presente.")
     private LocalDate createdAt;
 
-    @PastOrPresent(message = "A data de atualização deve ser no passado ou presente.") // Garante que a data de atualização seja válida.
+    @PastOrPresent(message = "A data de atualização deve ser no passado ou presente.")
     private LocalDate updatedAt;
 
-    @PrePersist // Executado antes de a entidade ser persistida no banco de dados.
+    @PrePersist
     public void prePersist() {
-        this.createdAt = LocalDate.now(); // Define a data de criação como a data atual.
+        this.createdAt = LocalDate.now();
     }
 
-    @PreUpdate // Executado antes de a entidade ser atualizada no banco de dados.
+    @PreUpdate
     public void preUpdate() {
-        this.updatedAt = LocalDate.now(); // Define a data de atualização como a data atual.
+        this.updatedAt = LocalDate.now();
     }
 }

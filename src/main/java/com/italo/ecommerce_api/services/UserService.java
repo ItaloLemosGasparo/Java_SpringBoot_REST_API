@@ -1,6 +1,6 @@
 package com.italo.ecommerce_api.services;
 
-import com.italo.ecommerce_api.models.User;
+import com.italo.ecommerce_api.models.user.User;
 import com.italo.ecommerce_api.repositories.UserRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;

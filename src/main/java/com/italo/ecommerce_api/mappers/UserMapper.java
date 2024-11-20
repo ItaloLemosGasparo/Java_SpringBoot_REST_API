@@ -1,7 +1,7 @@
 package com.italo.ecommerce_api.mappers;
 
 import com.italo.ecommerce_api.dtos.UserDTO;
-import com.italo.ecommerce_api.models.User;
+import com.italo.ecommerce_api.models.user.User;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
