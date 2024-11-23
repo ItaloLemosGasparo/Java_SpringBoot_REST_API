@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-11-22T20:18:28-0300",
+    date = "2024-11-23T17:00:02-0300",
     comments = "version: 1.5.3.Final, compiler: javac, environment: Java 23.0.1 (Oracle Corporation)"
 )
 @Component
@@ -21,7 +21,7 @@ public class UserTypeMapperImpl implements UserTypeMapper {
 
         UserTypeDTO userTypeDTO = new UserTypeDTO();
 
-        userTypeDTO.setId( userType.getId() );
+        userTypeDTO.setId( (long) userType.getId() );
         userTypeDTO.setName( userType.getName() );
         userTypeDTO.setDescription( userType.getDescription() );
 
@@ -36,7 +36,9 @@ public class UserTypeMapperImpl implements UserTypeMapper {
 
         UserType userType = new UserType();
 
-        userType.setId( userTypeDTO.getId() );
+        if ( userTypeDTO.getId() != null ) {
+            userType.setId( userTypeDTO.getId().intValue() );
+        }
         userType.setName( userTypeDTO.getName() );
         userType.setDescription( userTypeDTO.getDescription() );
 

@@ -1,5 +1,7 @@
 package dev.SpringBootAPI.ECommerce.models.product;
 
+import dev.SpringBootAPI.ECommerce.models.user.User;
+import dev.SpringBootAPI.ECommerce.models.user.UserType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
@@ -43,6 +45,10 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User seller;
 
     @NotNull(message = "A marca não pode ser nula.")
     @Size(min = 3, max = 100, message = "A marca deve ter entre 3 e 100 caracteres.")

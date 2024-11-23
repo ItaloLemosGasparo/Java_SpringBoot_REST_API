@@ -1,9 +1,12 @@
 package dev.SpringBootAPI.ECommerce.models.user;
 
+import dev.SpringBootAPI.ECommerce.models.product.Product;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 @Entity
@@ -11,7 +14,7 @@ import lombok.Data;
 public class UserType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     @NotNull(message = "O nome não pode ser nulo.")
     @Size(min = 3, max = 100, message = "O nome deve ter entre 3 e 100 caracteres.")
@@ -23,7 +26,6 @@ public class UserType {
     @Column(nullable = false, length = 2000)
     private String description;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    @OneToMany(mappedBy = "userType")
+    private List<User> user;
 }

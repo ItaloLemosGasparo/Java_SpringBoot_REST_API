@@ -29,10 +29,8 @@ public class UserController {
         //a criptogarfia da senha esta no userService.createUser
         User createdUser = userService.createUser(user);
 
-        UserDTO userDTO = userMapper.toDto(createdUser);
-        return ResponseEntity.status(201).body(userDTO);
+        return ResponseEntity.status(201).body(userMapper.toDto(createdUser));
     }
-
 
     //Get All Users
     @GetMapping
@@ -87,9 +85,9 @@ public class UserController {
     }
 
     //Update User by Email (full update)
-    @PutMapping("/email/{email}")
-    public ResponseEntity<UserDTO> updateUserByEmail(@PathVariable String email, @Valid @RequestBody UserDTO updatedUserDTO) {
-        Optional<User> existingUser = userService.getUserByEmail(email);
+    @PutMapping("/email")
+    public ResponseEntity<UserDTO> updateUserByEmail(@Valid @RequestBody UserDTO updatedUserDTO) {
+        Optional<User> existingUser = userService.getUserByEmail(updatedUserDTO.getEmail());
 
         if (existingUser.isEmpty())
             return ResponseEntity.notFound().build();

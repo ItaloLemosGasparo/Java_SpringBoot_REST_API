@@ -11,7 +11,6 @@ public class UserDTO {
     private String email;
     private String cpf;
     private LocalDate birthDate;
-    private String phone;
     private Boolean active;
     private LocalDate createdAt;
     private LocalDate updatedAt;
