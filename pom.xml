@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.italo</groupId>
-	<artifactId>ecomerce-api</artifactId>
+	<artifactId>SpringBoot_ECommerce_RESTful_API</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>ecomerce-api</name>
 	<description>Demo project for Spring Boot</description>

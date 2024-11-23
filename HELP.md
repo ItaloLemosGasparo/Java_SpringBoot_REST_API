@@ -1,7 +1,7 @@
 # Read Me First
 The following was discovered as part of building this project:
 
-* The original package name 'com.italo.ecomerce-api' is invalid and this project uses 'com.italo.ecommerce_api' instead.
+* The original package name 'com.italo.ecomerce-api' is invalid and this project uses 'com.italo.SpringBoot_ECommerce_RESTful_API' instead.
 
 # Getting Started
 
