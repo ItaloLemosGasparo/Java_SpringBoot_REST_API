@@ -19,33 +19,30 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    //Create
     @Transactional
     public User createUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         return userRepository.save(user);
     }
+    //
 
+    //Read
     public List<User> getUsers() {
         return userRepository.findAll();
     }
 
-    public List<User> getUsersByName(String name) {
-        return userRepository.findAllByNameContainingIgnoreCase(name);
-    }
-
-    public Optional<User> getUserByName(String name) {
-        return userRepository.findByNameContainingIgnoreCase(name);
+    public Optional<User> getUserById(Long id) {
+        return userRepository.findById(id);
     }
 
     public Optional<User> getUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
+    //
 
-    public void deleteUserById(Long id) {
-        userRepository.deleteById(id);
-    }
-
+    //Update
     @Transactional
     public User updateUser(User existingUser, User updatedUser) {
         if (updatedUser.getName() != null)
@@ -77,4 +74,11 @@ public class UserService {
 
         return userRepository.save(existingUser);
     }
+    //
+
+    //Delete
+    public void deleteUserById(Long id) {
+        userRepository.deleteById(id);
+    }
+    //
 }

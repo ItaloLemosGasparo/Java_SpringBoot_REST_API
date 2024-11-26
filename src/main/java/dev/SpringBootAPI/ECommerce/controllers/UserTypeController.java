@@ -23,15 +23,16 @@ public class UserTypeController {
     @Autowired
     UserTypeMapper userTypeMapper;
 
-    //Create UserType
+    //Create
     @PostMapping
     public ResponseEntity<UserTypeDTO> createUser(@Valid @RequestBody UserType userType) {
         userType.setName(userType.getName().toUpperCase()); //Name.UpperCase
 
         return ResponseEntity.status(201).body(userTypeMapper.toDto(userTypeService.createUserType(userType)));
     }
+    //
 
-    //Search UserType
+    //Read
     @GetMapping
     public ResponseEntity<List<UserTypeDTO>> getUserTypes(){
             List<UserType> userTypes = userTypeService.getUserTypes();
@@ -39,10 +40,17 @@ public class UserTypeController {
         if (userTypes.isEmpty())
             return  ResponseEntity.noContent().build();
 
-        List<UserTypeDTO> userTypeDTOs = userTypes.stream()
-                .map(userTypeMapper::toDto)
-                .collect(Collectors.toList());
-
-        return ResponseEntity.ok(userTypeDTOs);
+        return ResponseEntity.ok(
+                userTypes.stream()
+                        .map(userTypeMapper::toDto)
+                        .collect(Collectors.toList())
+        );
     }
+    //
+
+    //Update
+    //
+
+    //Delete
+    //
 }
