@@ -64,15 +64,15 @@ public class UserController {
 
     //Update
     @PutMapping
-    public ResponseEntity<UserDTO> updateUserByEmail(@Valid @RequestBody UserDTO updatedUserDTO) {
+    public ResponseEntity<UserDTO> updateUser(@Valid @RequestBody UserDTO updatedUserDTO)
+    {
         Optional<User> existingUser = userService.getUserById(updatedUserDTO.getId());
 
         if (existingUser.isEmpty())
             return ResponseEntity.notFound().build();
 
         User updatedUser = userMapper.toEntity(updatedUserDTO);
-        User savedUser = userService.updateUser(existingUser.get(), updatedUser);
-        return ResponseEntity.ok(userMapper.toDto(savedUser));  // Retorna o DTO atualizado
+        return ResponseEntity.ok(userMapper.toDto(userService.updateUser(existingUser.get(), updatedUser)));  // Retorna o DTO atualizado
     }
 
     @PatchMapping("/{email}")
@@ -83,13 +83,12 @@ public class UserController {
             return ResponseEntity.notFound().build();
 
         User partialUpdatedUser = userMapper.toEntity(partialUpdatedUserDTO);
-        User savedUser = userService.updateUser(existingUser.get(), partialUpdatedUser);
-        return ResponseEntity.ok(userMapper.toDto(savedUser));  // Retorna o DTO atualizado
+        return ResponseEntity.ok(userMapper.toDto(userService.updateUser(existingUser.get(), partialUpdatedUser)));
     }
     //
 
     //Delete
-    @DeleteMapping("/email/{email}")
+    @DeleteMapping("/{email}")
     public ResponseEntity<Void> deleteUserByEmail(@PathVariable String email) {
         Optional<User> userToDelete = userService.getUserByEmail(email);
 

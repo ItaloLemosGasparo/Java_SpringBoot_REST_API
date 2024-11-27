@@ -1,11 +1,11 @@
 package dev.SpringBootAPI.ECommerce.models.user;
 
-import dev.SpringBootAPI.ECommerce.models.product.Product;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -28,4 +28,14 @@ public class UserType {
 
     @OneToMany(mappedBy = "userType")
     private List<User> user;
+
+    @PrePersist
+    public void prePersist() {
+        this.name = name.toUpperCase();
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        this.name = name.toUpperCase();
+    }
 }

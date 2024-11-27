@@ -2,6 +2,7 @@ package dev.SpringBootAPI.ECommerce.services;
 
 import dev.SpringBootAPI.ECommerce.models.user.User;
 import dev.SpringBootAPI.ECommerce.repositories.UserRepository;
+import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,6 +19,9 @@ public class UserService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private EntityManager entityManager;
 
     //Create
     @Transactional
@@ -71,6 +75,9 @@ public class UserService {
 
         if (updatedUser.getActive() != null)
             existingUser.setActive(updatedUser.getActive());
+
+        entityManager.merge(existingUser); // Garante que a entidade está sincronizada
+        entityManager.flush(); // Força a sincronização no banco de dados
 
         return userRepository.save(existingUser);
     }
