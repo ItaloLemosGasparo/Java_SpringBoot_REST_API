@@ -1,12 +1,24 @@
 # E-Commerce API
 
-This project is a RESTful API for an e-commerce application developed in Java using Spring Boot. The API provides functionality for managing products, users, orders, authentication, and more.
+This project is a RESTful API for an e-commerce application developed in Java using Spring Boot. The API provides
+functionality for managing different types of users, addresses, products, orders, order Itens, with list,
+authentication, and more...
 
 ---
 
 ## 📌 Current Status
 
 This project is under active development. New features and improvements are being added.
+
+To do List { <br/>
+
+* Unit tests (JUnit)
+* Authentication (Spring Security)
+* Logging (slf4j)
+* Swagger (OpenAPI)
+
+<br/> Last but not least: Explode into Microservices.
+<br/> }
 
 ## 🚀 Technologies Used
 
@@ -16,7 +28,7 @@ This project is under active development. New features and improvements are bein
     - Spring Security
     - Spring Web
     - DevTools
-- **PostgreSQL** (relational database)
+- **PostgresSQL** (relational database)
 - **Lombok** (boilerplate reduction)
 - **MapStruct** (object mapping)
 - **Jakarta Validation** (validations)

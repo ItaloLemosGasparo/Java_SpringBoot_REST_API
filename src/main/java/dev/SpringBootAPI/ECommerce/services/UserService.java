@@ -76,8 +76,9 @@ public class UserService {
         if (updatedUser.getActive() != null)
             existingUser.setActive(updatedUser.getActive());
 
-        entityManager.merge(existingUser); // Garante que a entidade está sincronizada
-        entityManager.flush(); // Força a sincronização no banco de dados
+        // Força a sincronização da entidade e do banco de dados para garantir que o PreUpdate sejá chamado
+        entityManager.merge(existingUser);
+        entityManager.flush();
 
         return userRepository.save(existingUser);
     }

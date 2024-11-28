@@ -26,10 +26,9 @@ public class UserController {
     //Create
     @PostMapping
     public ResponseEntity<UserDTO> createUser(@Valid @RequestBody User user) {
-        //a criptogarfia da senha esta no userService.createUser
-        User createdUser = userService.createUser(user);
-
-        return ResponseEntity.status(201).body(userMapper.toDto(createdUser));
+        return ResponseEntity.status(201).body(
+                userMapper.toDto(userService.createUser(user))
+        );
     }
     //
 
@@ -56,23 +55,22 @@ public class UserController {
         if (user.isEmpty())
             return ResponseEntity.notFound().build();
 
-        return ResponseEntity.ok(
-                userMapper.toDto(user.get())
-        );
+        return ResponseEntity.ok(userMapper.toDto(user.get()));
     }
     //
 
     //Update
     @PutMapping
-    public ResponseEntity<UserDTO> updateUser(@Valid @RequestBody UserDTO updatedUserDTO)
-    {
+    public ResponseEntity<UserDTO> updateUser(@Valid @RequestBody UserDTO updatedUserDTO) {
         Optional<User> existingUser = userService.getUserById(updatedUserDTO.getId());
 
         if (existingUser.isEmpty())
             return ResponseEntity.notFound().build();
 
-        User updatedUser = userMapper.toEntity(updatedUserDTO);
-        return ResponseEntity.ok(userMapper.toDto(userService.updateUser(existingUser.get(), updatedUser)));  // Retorna o DTO atualizado
+        return ResponseEntity.ok(userMapper.toDto(userService.updateUser(
+                existingUser.get(),
+                userMapper.toEntity(updatedUserDTO)))
+        );
     }
 
     @PatchMapping("/{email}")

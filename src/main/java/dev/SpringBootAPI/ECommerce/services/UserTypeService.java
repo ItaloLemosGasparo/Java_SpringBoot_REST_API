@@ -46,8 +46,9 @@ public class UserTypeService {
         if (updatedUserType.getDescription() != null)
             existingUserType.setDescription(updatedUserType.getDescription());
 
-        entityManager.merge(existingUserType); // Garante que a entidade está sincronizada
-        entityManager.flush(); // Força a sincronização no banco de dados
+        // Força a sincronização da entidade e do banco de dados para garantir que o PreUpdate sejá chamado
+        entityManager.merge(existingUserType);
+        entityManager.flush();
 
         return userTypeRepository.save(existingUserType);
     }

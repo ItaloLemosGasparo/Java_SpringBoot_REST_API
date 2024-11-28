@@ -1,11 +1,7 @@
 package dev.SpringBootAPI.ECommerce.AOP;
 
-import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.After;
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.AfterThrowing;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -13,28 +9,35 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Component
 public class LoggingAspect {
-	public static final Logger LOGGER=LoggerFactory.getLogger(LoggingAspect.class);
-	
-	@Before("execution (* dev.SpringBootAPI.ECommerce.services.*.*(..))")
-	public void logMethodCall(JoinPoint jp) {
-		LOGGER.info("Method Called "+jp.getSignature().getName());
-	}
 
-//	@After("execution (* com.telusko.springbootrest.service.JobService.getJob*(..)) || execution(* com.telusko.springbootrest.service.JobService.updateJob*(..))")
-//	public void logMethodExecuted(JoinPoint jp) {
-//		LOGGER.info("Method Executed "+jp.getSignature().getName());
-//	}
-//
-//
-//	@AfterThrowing("execution (* com.telusko.springbootrest.service.JobService.getJob*(..)) || execution(* com.telusko.springbootrest.service.JobService.updateJob*(..))")
-//	public void logMethodCrashed(JoinPoint jp) {
-//		LOGGER.info("Method has some issues "+jp.getSignature().getName());
-//	}
-//
-//
-//
-//	@AfterReturning("execution (* com.telusko.springbootrest.service.JobService.getJob*(..)) || execution(* com.telusko.springbootrest.service.JobService.updateJob*(..))")
-//	public void logMethodExecutedSuccess(JoinPoint jp) {
-//		LOGGER.info("Method Executed Successfully "+jp.getSignature().getName());
-//	}
+    private static final Logger logger = LoggerFactory.getLogger(LoggingAspect.class);
+
+    // Intercepta todos os métodos dentro de ECommerce
+    @Around("execution(* dev.SpringBootAPI.ECommerce.controllers.*.*(..)) || " +
+            "execution(* dev.SpringBootAPI.ECommerce.services.*.*(..)) || " +
+            "execution(* dev.SpringBootAPI.ECommerce.repositories.*.*(..))")
+    public Object logExecutionTime(ProceedingJoinPoint joinPoint) throws Throwable {
+        long start = System.currentTimeMillis();
+
+        // Obtém informações sobre o metodo sendo executado
+        String methodName = joinPoint.getSignature().getName();
+        String className = joinPoint.getTarget().getClass().getSimpleName();
+        Object[] args = joinPoint.getArgs();
+
+        logger.info("Executing {}.{} with arguments {}", className, methodName, args);
+
+        Object result;
+        try {
+            result = joinPoint.proceed(); // Executa o metodo
+        } catch (Exception e) {
+            logger.error("Exception in {}.{}: {}", className, methodName, e.getMessage());
+            throw e;
+        }
+
+        long executionTime = System.currentTimeMillis() - start;
+        logger.info("Executed {}.{} in {} ms", className, methodName, executionTime);
+
+        return result;
+    }
 }
+

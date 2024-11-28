@@ -26,7 +26,9 @@ public class UserTypeController {
     //Create
     @PostMapping
     public ResponseEntity<UserTypeDTO> createUser(@Valid @RequestBody UserType userType) {
-        return ResponseEntity.status(201).body(userTypeMapper.toDto(userTypeService.createUserType(userType)));
+        return ResponseEntity.status(201).body(
+                userTypeMapper.toDto(userTypeService.createUserType(userType))
+        );
     }
     //
 
@@ -50,17 +52,6 @@ public class UserTypeController {
     @PutMapping
     public ResponseEntity<UserTypeDTO> updateUserType(@Valid @RequestBody UserTypeDTO updateUserTypeDTO) {
         Optional<UserType> existingUserType = userTypeService.getUserTypeById(updateUserTypeDTO.getId());
-
-        if (existingUserType.isEmpty())
-            return ResponseEntity.notFound().build();
-
-        UserType updateUserType = userTypeMapper.toEntity(updateUserTypeDTO);
-        return ResponseEntity.ok(userTypeMapper.toDto(userTypeService.updateUserType(existingUserType.get(), updateUserType)));
-    }
-
-    @PatchMapping("/{id}")
-    public ResponseEntity<UserTypeDTO> patchUserTypeById(@PathVariable int id, @Valid @RequestBody UserTypeDTO updateUserTypeDTO) {
-        Optional<UserType> existingUserType = userTypeService.getUserTypeById(id);
 
         if (existingUserType.isEmpty())
             return ResponseEntity.notFound().build();
