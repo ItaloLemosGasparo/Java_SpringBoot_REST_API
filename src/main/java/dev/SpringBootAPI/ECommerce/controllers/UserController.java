@@ -86,9 +86,9 @@ public class UserController {
     //
 
     //Delete
-    @DeleteMapping("/{email}")
-    public ResponseEntity<Void> deleteUserByEmail(@PathVariable String email) {
-        Optional<User> userToDelete = userService.getUserByEmail(email);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteUserByEmail(@PathVariable Long id) {
+        Optional<User> userToDelete = userService.getUserById(id);
 
         if (userToDelete.isEmpty())
             return ResponseEntity.notFound().build();
