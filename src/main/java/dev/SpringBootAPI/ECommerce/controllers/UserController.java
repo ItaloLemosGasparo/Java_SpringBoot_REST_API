@@ -74,7 +74,7 @@ public class UserController {
     }
 
     @PatchMapping("/{email}")
-    public ResponseEntity<UserDTO> patchUserByEmail(@PathVariable String email, @RequestBody UserDTO partialUpdatedUserDTO) {
+    public ResponseEntity<UserDTO> patchUserByEmail(@PathVariable String email, @Valid @RequestBody UserDTO partialUpdatedUserDTO) {
         Optional<User> existingUser = userService.getUserByEmail(email);
 
         if (existingUser.isEmpty())

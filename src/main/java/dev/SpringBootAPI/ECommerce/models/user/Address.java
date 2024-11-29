@@ -1,5 +1,6 @@
 package dev.SpringBootAPI.ECommerce.models.user;
 
+import dev.SpringBootAPI.ECommerce.validators.address.ValidZipcode;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -34,6 +35,7 @@ public class Address {
 
     @NotNull(message = "O CEP não pode ser nulo.")
     @Pattern(regexp = "\\d{8}", message = "O CEP deve conter 8 dígitos.")
+    @ValidZipcode(message = "O CEP deve estar no formato 00000-000.")
     private String zipCode;
 
     @ManyToOne

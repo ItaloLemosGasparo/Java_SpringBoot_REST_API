@@ -13,16 +13,25 @@ import java.util.Map;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Map<String, String>> handleValidationExceptions(MethodArgumentNotValidException ex) {
+    public ResponseEntity<Object> handleValidationExceptions(MethodArgumentNotValidException ex) {
         Map<String, String> errors = new HashMap<>();
         ex.getBindingResult().getFieldErrors().forEach(error ->
                 errors.put(error.getField(), error.getDefaultMessage())
         );
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of(
+                "status", HttpStatus.BAD_REQUEST.value(),
+                "error", "Validation Error",
+                "details", errors
+        ));
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<String> handleGeneralExceptions(Exception ex) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred: " + ex.getMessage());
+    public ResponseEntity<Object> handleGeneralExceptions(Exception ex) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of(
+                "status", HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                "error", "Internal Server Error",
+                "message", ex.getMessage()
+        ));
     }
 }

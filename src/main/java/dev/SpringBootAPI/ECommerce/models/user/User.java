@@ -1,7 +1,7 @@
 package dev.SpringBootAPI.ECommerce.models.user;
 
 import dev.SpringBootAPI.ECommerce.models.product.Product;
-import dev.SpringBootAPI.ECommerce.validators.ValidCpf;
+import dev.SpringBootAPI.ECommerce.validators.cpf.ValidCpf;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
@@ -13,7 +13,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Data
-@EqualsAndHashCode(exclude = "password") // Exclui o campo 'password' da comparação de igualdade e do cálculo do hashCode
+@EqualsAndHashCode(exclude = "password")
+// Exclui o campo 'password' da comparação de igualdade e do cálculo do hashCode
 @Entity // Define a classe como uma entidade JPA
 @AllArgsConstructor // Gera um construtor com todos os campos da classe
 @NoArgsConstructor // Gera um construtor sem parâmetros
@@ -21,7 +22,8 @@ import java.util.List;
 public class User {
 
     @Id // Define o campo como chave primária
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Define a estratégia de geração do ID como identidade (autoincremento)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    // Define a estratégia de geração do ID como identidade (autoincremento)
     private Long id;
 
     @NotNull(message = "O nome não pode ser nulo.")
@@ -31,6 +33,7 @@ public class User {
 
     @NotNull(message = "O email não pode ser nulo.")
     @Email(message = "O email deve ser válido.")
+    @Size(max = 100, message = "O email deve ter no maximo 100 caracteres.")
     @Column(unique = true, nullable = false, length = 100)
     private String email;
 
@@ -40,7 +43,7 @@ public class User {
 
     @NotNull(message = "O CPF não pode ser nulo.")
     @ValidCpf(message = "CPF inválido.")
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String cpf;
 
     @NotNull(message = "A data de nascimento não pode ser nula.")
@@ -55,7 +58,8 @@ public class User {
     private Boolean active = true;
 
     @NotNull(message = "A data de criação não pode ser nula.")
-    @PastOrPresent(message = "A data de criação deve ser no passado ou presente.") // Valida que a data de criação deve ser no passado ou presente
+    @PastOrPresent(message = "A data de criação deve ser no passado ou presente.")
+    // Valida que a data de criação deve ser no passado ou presente
     private LocalDate createdAt;
 
     @PastOrPresent(message = "A data de atualização deve ser no passado ou presente.")

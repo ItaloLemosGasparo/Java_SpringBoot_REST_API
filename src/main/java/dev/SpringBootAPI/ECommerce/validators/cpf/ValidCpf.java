@@ -1,4 +1,4 @@
-package dev.SpringBootAPI.ECommerce.validators;
+package dev.SpringBootAPI.ECommerce.validators.cpf;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
@@ -11,6 +11,8 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ValidCpf {
     String message() default "Invalid CPF format";
+
     Class<?>[] groups() default {};
+
     Class<? extends Payload>[] payload() default {};
 }
