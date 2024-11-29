@@ -14,20 +14,19 @@ import java.util.List;
 
 @Data
 @EqualsAndHashCode(exclude = "password")
-// Exclui o campo 'password' da comparação de igualdade e do cálculo do hashCode
 @Entity // Define a classe como uma entidade JPA
-@AllArgsConstructor // Gera um construtor com todos os campos da classe
-@NoArgsConstructor // Gera um construtor sem parâmetros
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "Users") // Define o nome da tabela no banco de dados
 public class User {
 
     @Id // Define o campo como chave primária
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    // Define a estratégia de geração do ID como identidade (autoincremento)
     private Long id;
 
     @NotNull(message = "O nome não pode ser nulo.")
     @Size(min = 3, max = 100, message = "O nome deve ter entre 3 e 100 caracteres.")
+    @Pattern(regexp = "^[A-Za-zÀ-ÿ\\s]+$", message = "O nome só pode conter letras e espaços.")
     @Column(nullable = false, length = 100) // Define as caracteristicas da coluna no banco
     private String name;
 
@@ -38,6 +37,7 @@ public class User {
     private String email;
 
     @NotNull(message = "A senha não pode ser nula.")
+    @Pattern(regexp = "(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]).{8,}", message = "A senha deve ter no mínimo 8 caracteres, incluindo letras, números e caracteres especiais.")
     @Column(nullable = false)
     private String password;
 
@@ -51,20 +51,21 @@ public class User {
     private LocalDate birthDate;
 
     // Definindo a chave estrangeira para o UserType
-    @ManyToOne // Define um relacionamento muitos-para-um com a entidade UserType
-    @JoinColumn(name = "userType_id", nullable = false) // Especifica a coluna 'userType_id' como chave estrangeira
+    @NotNull(message = "O tipo de usuário não pode ser nulo.")
+    @ManyToOne
+    @JoinColumn(name = "userType_id", nullable = false)
     private UserType userType;
 
     private Boolean active = true;
 
     @NotNull(message = "A data de criação não pode ser nula.")
     @PastOrPresent(message = "A data de criação deve ser no passado ou presente.")
-    // Valida que a data de criação deve ser no passado ou presente
     private LocalDate createdAt;
 
     @PastOrPresent(message = "A data de atualização deve ser no passado ou presente.")
     private LocalDate updatedAt;
 
+    //Referencias de outras tabelas para User
     @OneToMany(mappedBy = "user") // Define o relacionamento um-para-muitos com a entidade Address
     private List<Address> address;
 
@@ -73,6 +74,7 @@ public class User {
 
     @OneToMany(mappedBy = "seller") // Define o relacionamento um-para-muitos com a entidade Product
     private List<Product> product;
+    //
 
     @PrePersist // Metodo executado antes de persistir o usuário no banco de dados
     public void prePersist() {

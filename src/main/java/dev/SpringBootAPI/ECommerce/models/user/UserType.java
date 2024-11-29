@@ -22,8 +22,8 @@ public class UserType {
     private String name;
 
     @NotNull(message = "A descrição não pode ser nula.")
-    @Size(min = 100, max = 2000, message = "A descrição deve ter entre 100 e 2000 caracteres.")
-    @Column(nullable = false, length = 2000)
+    @Size(min = 3, max = 255, message = "A descrição deve ter entre 3 e 255 caracteres.")
+    @Column(nullable = false, length = 255)
     private String description;
 
     @OneToMany(mappedBy = "userType")

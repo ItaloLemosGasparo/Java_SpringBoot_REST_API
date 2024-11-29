@@ -5,7 +5,7 @@ import jakarta.validation.ConstraintValidatorContext;
 
 public class ZipcodeValidator implements ConstraintValidator<ValidZipcode, String> {
 
-    // Aqui você pode ajustar para o formato desejado, como o padrão brasileiro "00000-000"
+    // Padrão brasileiro "00000-000"
     private static final String ZIPCODE_REGEX = "\\d{5}-\\d{3}";
 
     @Override
