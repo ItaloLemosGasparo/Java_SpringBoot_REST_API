@@ -12,7 +12,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/{userId}/phone")
+@RequestMapping("/api/user/{userId}/phone")
 public class PhoneController {
 
     @Autowired

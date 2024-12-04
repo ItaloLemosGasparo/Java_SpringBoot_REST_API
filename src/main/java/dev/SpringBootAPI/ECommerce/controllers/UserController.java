@@ -68,7 +68,7 @@ public class UserController {
         if (userDTO.isEmpty())
             return ResponseEntity.notFound().build();
 
-        userService.inactiveActiveUser(userDTO.get());
+        userService.inactiveActiveUser(id);
         return ResponseEntity.ok().build();
     }
     //

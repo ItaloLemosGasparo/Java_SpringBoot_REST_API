@@ -54,9 +54,14 @@ public class UserService {
     public UserDTO updateUser(UUID id, UserDTO updatedUserDTO) {
         User existingUser = userRepository.findById(id).get();
 
-        if (updatedUserDTO.getName() != null) {
+        if (updatedUserDTO.getName() != null)
             existingUser.setName(updatedUserDTO.getName());
-        }
+
+        if (updatedUserDTO.getEmail() != null)
+            existingUser.setEmail(updatedUserDTO.getEmail());
+
+        if (updatedUserDTO.getBirthDate() != null)
+            existingUser.setBirthDate(updatedUserDTO.getBirthDate());
 
         entityManager.merge(existingUser); //force synchronization
 
@@ -68,8 +73,8 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(password.getPassword()));
     }
 
-    public void inactiveActiveUser(UserDTO userDTO) {
-        User user = userMapper.toEntity(userDTO);
+    public void inactiveActiveUser(UUID id) {
+        User user = userRepository.findById(id).get();
         user.setActive(!user.getActive());
         userRepository.save(user);
     }
