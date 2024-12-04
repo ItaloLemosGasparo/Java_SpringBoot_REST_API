@@ -23,6 +23,8 @@ public class Phone {
     @Column(nullable = false, length = 9)
     private String number;
 
+    private boolean confirmed = false;
+
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;

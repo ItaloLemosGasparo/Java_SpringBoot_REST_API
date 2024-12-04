@@ -4,6 +4,8 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
+import java.util.UUID;
+
 @Data
 public class PhoneDTO {
 
@@ -17,5 +19,7 @@ public class PhoneDTO {
     @Pattern(regexp = "^\\d{8,9}$", message = "O número de telefone deve ter entre 8 e 9 dígitos.")
     private String number;
 
-    private Long userId;
+    private boolean confirmed = false;
+
+    private UUID userId;
 }

@@ -5,10 +5,11 @@ import jakarta.validation.constraints.*;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Data
 public class UserDTO {
-    private Long id;
+    private UUID id;
 
     @NotNull(message = "O nome não pode ser nulo.")
     @Pattern(regexp = "^[A-Za-zÀ-ÿ\\s]+$", message = "O nome só pode conter letras e espaços.")
@@ -29,6 +30,8 @@ public class UserDTO {
     private LocalDate birthDate;
 
     private Boolean active;
+
+    private String url;
 
     @PastOrPresent(message = "A data de criação deve ser no passado ou presente.")
     private LocalDate createdAt;

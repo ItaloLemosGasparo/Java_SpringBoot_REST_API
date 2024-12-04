@@ -10,9 +10,10 @@ import org.mapstruct.factory.Mappers;
 public interface AddressMapper {
     AddressMapper INSTANCE = Mappers.getMapper(AddressMapper.class);
 
-    @Mapping(source = "user.id", target = "userId")  // Mapeia o ID do usuário
+    // Lida com a diferença entre um objeto User e o campo userId do DTO
+    @Mapping(source = "user.id", target = "userId")
     AddressDTO toDto(Address address);
 
-    @Mapping(source = "userId", target = "user.id")  // Mapeia o ID de volta para o objeto user
+    @Mapping(source = "userId", target = "user.id")
     Address toEntity(AddressDTO addressDTO);
 }

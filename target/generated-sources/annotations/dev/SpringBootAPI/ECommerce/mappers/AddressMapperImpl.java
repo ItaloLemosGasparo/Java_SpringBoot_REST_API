@@ -3,12 +3,13 @@ package dev.SpringBootAPI.ECommerce.mappers;
 import dev.SpringBootAPI.ECommerce.dtos.AddressDTO;
 import dev.SpringBootAPI.ECommerce.models.user.Address;
 import dev.SpringBootAPI.ECommerce.models.user.User;
+import java.util.UUID;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-11-28T21:17:37-0300",
+    date = "2024-12-03T23:17:38-0300",
     comments = "version: 1.5.3.Final, compiler: javac, environment: Java 23.0.1 (Oracle Corporation)"
 )
 @Component
@@ -24,13 +25,13 @@ public class AddressMapperImpl implements AddressMapper {
 
         addressDTO.setUserId( addressUserId( address ) );
         addressDTO.setId( address.getId() );
+        addressDTO.setZipCode( address.getZipCode() );
         addressDTO.setStreet( address.getStreet() );
-        addressDTO.setNumber( address.getNumber() );
         addressDTO.setComplement( address.getComplement() );
+        addressDTO.setNumber( address.getNumber() );
         addressDTO.setNeighborhood( address.getNeighborhood() );
         addressDTO.setCity( address.getCity() );
         addressDTO.setState( address.getState() );
-        addressDTO.setZipCode( address.getZipCode() );
 
         return addressDTO;
     }
@@ -45,18 +46,18 @@ public class AddressMapperImpl implements AddressMapper {
 
         address.setUser( addressDTOToUser( addressDTO ) );
         address.setId( addressDTO.getId() );
+        address.setZipCode( addressDTO.getZipCode() );
         address.setStreet( addressDTO.getStreet() );
-        address.setNumber( addressDTO.getNumber() );
         address.setComplement( addressDTO.getComplement() );
+        address.setNumber( addressDTO.getNumber() );
         address.setNeighborhood( addressDTO.getNeighborhood() );
         address.setCity( addressDTO.getCity() );
         address.setState( addressDTO.getState() );
-        address.setZipCode( addressDTO.getZipCode() );
 
         return address;
     }
 
-    private Long addressUserId(Address address) {
+    private UUID addressUserId(Address address) {
         if ( address == null ) {
             return null;
         }
@@ -64,7 +65,7 @@ public class AddressMapperImpl implements AddressMapper {
         if ( user == null ) {
             return null;
         }
-        Long id = user.getId();
+        UUID id = user.getId();
         if ( id == null ) {
             return null;
         }

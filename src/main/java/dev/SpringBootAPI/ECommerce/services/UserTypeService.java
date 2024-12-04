@@ -1,56 +1,62 @@
 package dev.SpringBootAPI.ECommerce.services;
 
 import dev.SpringBootAPI.ECommerce.dtos.UserTypeDTO;
+import dev.SpringBootAPI.ECommerce.mappers.UserTypeMapper;
 import dev.SpringBootAPI.ECommerce.models.user.UserType;
 import dev.SpringBootAPI.ECommerce.repositories.UserTypeRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserTypeService {
+
     @Autowired
-    UserTypeRepository userTypeRepository;
+    private UserTypeRepository userTypeRepository;
 
     @Autowired
     private EntityManager entityManager;
 
+    @Autowired
+    private UserTypeMapper userTypeMapper;
+
     //Create
-    public UserType createUserType(@Valid UserType userType) {
-        return userTypeRepository.save(userType);
+    public UserTypeDTO createUserType(@Valid UserType userType) {
+        return userTypeMapper.toDto(userTypeRepository.save(userType));
     }
     //
 
     //Read
-    public List<UserType> getUserTypes() {
-        return userTypeRepository.findAll();
+    public List<UserTypeDTO> getUserTypes() {
+        return userTypeRepository.findAll().stream().map(userTypeMapper::toDto).collect(Collectors.toList());
     }
 
-    public Optional<UserType> getUserTypeById(int id) {
-        return userTypeRepository.findById(id);
+    public Optional<UserTypeDTO> getUserTypeById(int id) {
+        return userTypeRepository.findById(id).map(userTypeMapper::toDto);
     }
     //
 
     //Update
     @Transactional
-    public UserType updateUserType(UserType existingUserType, UserType updatedUserType) {
-        if (updatedUserType.getName() != null)
-            existingUserType.setName(updatedUserType.getName());
+    public UserTypeDTO updateUserType(UserTypeDTO existingUserTypeDTO, UserTypeDTO updatedUserTypeDTO) {
+        UserType existingUserType = userTypeMapper.toEntity(existingUserTypeDTO);
 
-        if (updatedUserType.getDescription() != null)
-            existingUserType.setDescription(updatedUserType.getDescription());
+        if (updatedUserTypeDTO.getName() != null)
+            existingUserType.setName(updatedUserTypeDTO.getName());
+
+        if (updatedUserTypeDTO.getDescription() != null)
+            existingUserType.setDescription(updatedUserTypeDTO.getDescription());
 
         // Força a sincronização da entidade e do banco de dados para garantir que o PreUpdate sejá chamado
         entityManager.merge(existingUserType);
-        entityManager.flush();
 
-        return userTypeRepository.save(existingUserType);
+        return userTypeMapper.toDto(userTypeRepository.save(existingUserType));
     }
     //
 

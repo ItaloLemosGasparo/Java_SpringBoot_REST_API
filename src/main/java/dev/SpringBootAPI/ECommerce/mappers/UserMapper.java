@@ -10,9 +10,8 @@ import org.mapstruct.factory.Mappers;
 public interface UserMapper {
     UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
 
-    @Mapping(source = "userType", target = "userType")
+    @Mapping(target = "url", expression = "java(\"http://localhost:8080/api/user/\" + user.getId())")
     UserDTO toDto(User user);
 
-    @Mapping(source = "userType", target = "userType")
     User toEntity(UserDTO userDTO);
 }

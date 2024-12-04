@@ -8,21 +8,23 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 
+import java.rmi.server.UID;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 @Data
 @EqualsAndHashCode(exclude = "password")
 @Entity // Define a classe como uma entidade JPA
-@AllArgsConstructor
-@NoArgsConstructor
 @Table(name = "Users") // Define o nome da tabela no banco de dados
 public class User {
 
-    @Id // Define o campo como chave primária
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", columnDefinition = "UUID", updatable = false, nullable = false)
+    private UUID id;
 
     @NotNull(message = "O nome não pode ser nulo.")
     @Size(min = 3, max = 100, message = "O nome deve ter entre 3 e 100 caracteres.")
@@ -58,7 +60,6 @@ public class User {
 
     private Boolean active = true;
 
-    @NotNull(message = "A data de criação não pode ser nula.")
     @PastOrPresent(message = "A data de criação deve ser no passado ou presente.")
     private LocalDate createdAt;
 
@@ -76,7 +77,7 @@ public class User {
     private List<Product> product;
     //
 
-    @PrePersist // Metodo executado antes de persistir o usuário no banco de dados
+    @PrePersist
     public void prePersist() {
         this.createdAt = LocalDate.now();
     }

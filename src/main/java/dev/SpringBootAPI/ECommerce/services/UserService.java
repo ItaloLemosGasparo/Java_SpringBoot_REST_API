@@ -1,5 +1,8 @@
 package dev.SpringBootAPI.ECommerce.services;
 
+import dev.SpringBootAPI.ECommerce.dtos.UserDTO;
+import dev.SpringBootAPI.ECommerce.mappers.UserMapper;
+import dev.SpringBootAPI.ECommerce.models.user.Password;
 import dev.SpringBootAPI.ECommerce.models.user.User;
 import dev.SpringBootAPI.ECommerce.repositories.UserRepository;
 import jakarta.persistence.EntityManager;
@@ -10,12 +13,17 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private UserMapper userMapper;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -25,66 +33,50 @@ public class UserService {
 
     //Create
     @Transactional
-    public User createUser(User user) {
+    public UserDTO createUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userRepository.save(user);
+        return userMapper.toDto(userRepository.save(user));
     }
     //
 
     //Read
-    public List<User> getUsers() {
-        return userRepository.findAll();
+    public List<UserDTO> findAll() {
+        return userRepository.findAll().stream().map(userMapper::toDto).collect(Collectors.toList());
     }
 
-    public Optional<User> getUserById(Long id) {
-        return userRepository.findById(id);
-    }
-
-    public Optional<User> getUserByEmail(String email) {
-        return userRepository.findByEmail(email);
+    public Optional<UserDTO> findById(UUID uuid) {
+        return userRepository.findById(uuid).map(userMapper::toDto);
     }
     //
 
     //Update
     @Transactional
-    public User updateUser(User existingUser, User updatedUser) {
-        if (updatedUser.getName() != null)
-            existingUser.setName(updatedUser.getName());
+    public UserDTO updateUser(UUID id, UserDTO updatedUserDTO) {
+        User existingUser = userRepository.findById(id).get();
 
-        if (updatedUser.getEmail() != null)
-            existingUser.setEmail(updatedUser.getEmail());
+        if (updatedUserDTO.getName() != null) {
+            existingUser.setName(updatedUserDTO.getName());
+        }
 
-        if (updatedUser.getPassword() != null)
-            existingUser.setPassword(passwordEncoder.encode(updatedUser.getPassword()));
+        entityManager.merge(existingUser); //force synchronization
 
-        if (updatedUser.getCpf() != null)
-            existingUser.setCpf(updatedUser.getCpf());
+        return userMapper.toDto(userRepository.save(existingUser));
+    }
 
-        if (updatedUser.getBirthDate() != null)
-            existingUser.setBirthDate(updatedUser.getBirthDate());
+    public void updateUserPassword(UUID id, Password password) {
+        User user = userRepository.findById(id).get();
+        user.setPassword(passwordEncoder.encode(password.getPassword()));
+    }
 
-        if (updatedUser.getPhone() != null)
-            existingUser.setPhone(updatedUser.getPhone());
-
-        if (updatedUser.getAddress() != null)
-            existingUser.setAddress(updatedUser.getAddress());
-
-        if (updatedUser.getUserType() != null)
-            existingUser.setUserType(updatedUser.getUserType());
-
-        if (updatedUser.getActive() != null)
-            existingUser.setActive(updatedUser.getActive());
-
-        // Força a sincronização da entidade e do banco de dados para garantir que o PreUpdate sejá chamado
-        entityManager.merge(existingUser);
-        entityManager.flush();
-
-        return userRepository.save(existingUser);
+    public void inactiveActiveUser(UserDTO userDTO) {
+        User user = userMapper.toEntity(userDTO);
+        user.setActive(!user.getActive());
+        userRepository.save(user);
     }
     //
 
     //Delete
-    public void deleteUserById(Long id) {
+    public void deleteUser(UUID id) {
         userRepository.deleteById(id);
     }
     //

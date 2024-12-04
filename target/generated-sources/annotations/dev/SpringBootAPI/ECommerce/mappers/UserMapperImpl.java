@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-11-28T21:17:37-0300",
+    date = "2024-12-03T23:17:38-0300",
     comments = "version: 1.5.3.Final, compiler: javac, environment: Java 23.0.1 (Oracle Corporation)"
 )
 @Component
@@ -25,7 +25,6 @@ public class UserMapperImpl implements UserMapper {
 
         UserDTO userDTO = new UserDTO();
 
-        userDTO.setUserType( userTypeMapper.toDto( user.getUserType() ) );
         userDTO.setId( user.getId() );
         userDTO.setName( user.getName() );
         userDTO.setEmail( user.getEmail() );
@@ -34,6 +33,9 @@ public class UserMapperImpl implements UserMapper {
         userDTO.setActive( user.getActive() );
         userDTO.setCreatedAt( user.getCreatedAt() );
         userDTO.setUpdatedAt( user.getUpdatedAt() );
+        userDTO.setUserType( userTypeMapper.toDto( user.getUserType() ) );
+
+        userDTO.setUrl( "http://localhost:8080/api/user/" + user.getId() );
 
         return userDTO;
     }
@@ -46,12 +48,12 @@ public class UserMapperImpl implements UserMapper {
 
         User user = new User();
 
-        user.setUserType( userTypeMapper.toEntity( userDTO.getUserType() ) );
         user.setId( userDTO.getId() );
         user.setName( userDTO.getName() );
         user.setEmail( userDTO.getEmail() );
         user.setCpf( userDTO.getCpf() );
         user.setBirthDate( userDTO.getBirthDate() );
+        user.setUserType( userTypeMapper.toEntity( userDTO.getUserType() ) );
         user.setActive( userDTO.getActive() );
         user.setCreatedAt( userDTO.getCreatedAt() );
         user.setUpdatedAt( userDTO.getUpdatedAt() );

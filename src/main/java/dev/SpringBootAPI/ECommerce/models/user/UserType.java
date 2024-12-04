@@ -5,13 +5,13 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Data
 @Entity
 @Table(name = "UserTypes")
 public class UserType {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

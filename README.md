@@ -12,6 +12,7 @@ This project is under active development. New features and improvements are bein
 
 To do List { <br/>
 
+* UUID
 * Zipode Validation
 * Unit tests (JUnit)
 * Authentication (Spring Security)

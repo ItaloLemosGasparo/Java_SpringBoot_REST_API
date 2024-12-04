@@ -5,6 +5,8 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
+import java.util.UUID;
+
 @Data
 public class AddressDTO {
 
@@ -37,5 +39,5 @@ public class AddressDTO {
     @Pattern(regexp = "^[A-Z]{2}$", message = "O estado/UF deve ser composta por duas letras maiúsculas.")
     private String state;
 
-    private Long userId;
+    private UUID userId;
 }
