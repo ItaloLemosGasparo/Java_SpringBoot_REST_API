@@ -11,7 +11,7 @@ import java.util.List;
 @Entity
 @Table(name = "UserTypes")
 public class UserType {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -28,14 +28,4 @@ public class UserType {
 
     @OneToMany(mappedBy = "userType")
     private List<User> user;
-
-    @PrePersist
-    public void prePersist() {
-        this.name = name.toUpperCase();
-    }
-
-    @PreUpdate
-    public void preUpdate() {
-        this.name = name.toUpperCase();
-    }
 }

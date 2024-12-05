@@ -27,15 +27,6 @@ public class GlobalExceptionHandler {
                 "details", errors
         ));
     }
-//Lidar com isso depois
-//    @ExceptionHandler(TransactionSystemException.class)
-//    public ResponseEntity<Object> handleTransactionSystemExceptions(TransactionSystemException ex) {
-//        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of(
-//                "status", HttpStatus.BAD_REQUEST.value(),
-//                "error", "Transaction System Error",
-//                "message", ex.getMessage() + " " + ex.getCause().getLocalizedMessage() + " " + ex.getCause().getMessage()
-//        ));
-//    }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Object> handleGeneralExceptions(Exception ex) {

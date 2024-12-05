@@ -1,13 +1,12 @@
 package dev.SpringBootAPI.ECommerce.services;
 
 import dev.SpringBootAPI.ECommerce.dtos.PhoneDTO;
-import dev.SpringBootAPI.ECommerce.mappers.PhoneMapper;
+import dev.SpringBootAPI.ECommerce.mappers.user.PhoneMapper;
 import dev.SpringBootAPI.ECommerce.models.user.Phone;
 import dev.SpringBootAPI.ECommerce.repositories.PhoneRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

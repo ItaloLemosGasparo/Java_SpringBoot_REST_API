@@ -1,13 +1,12 @@
 package dev.SpringBootAPI.ECommerce.services;
 
 import dev.SpringBootAPI.ECommerce.dtos.AddressDTO;
-import dev.SpringBootAPI.ECommerce.mappers.AddressMapper;
+import dev.SpringBootAPI.ECommerce.mappers.user.AddressMapper;
 import dev.SpringBootAPI.ECommerce.models.user.Address;
 import dev.SpringBootAPI.ECommerce.repositories.AddressRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,13 +27,13 @@ public class AddressService {
     EntityManager entityManager;
 
     //Create
-    public AddressDTO createAddress(@Valid Address address) {
+    public AddressDTO createAddress(Address address) {
         return addressMapper.toDto(addressRepository.save(address));
     }
     //
 
     //Read
-    public Optional<AddressDTO> getAddressById(Long id) {
+    public Optional<AddressDTO> getAddressById(Integer id) {
         return addressRepository.findById(id).map(addressMapper::toDto);
     }
 
@@ -48,31 +47,24 @@ public class AddressService {
     public AddressDTO updateAddress(AddressDTO existingAddressDTO, @Valid AddressDTO updateAddressDTO) {
         Address existingAddress = addressMapper.toEntity(existingAddressDTO);
 
-        if (updateAddressDTO.getStreet() != null)
-            existingAddress.setStreet(updateAddressDTO.getStreet());
+        if (updateAddressDTO.getZipCode() != null)
+            existingAddress.setZipCode(updateAddressDTO.getZipCode());
+
+        if (updateAddressDTO.getComplement() != null)
+            existingAddress.setComplement(updateAddressDTO.getComplement());
 
         if (updateAddressDTO.getNumber() != null)
-            existingAddress.setStreet(updateAddressDTO.getNumber());
+            existingAddress.setNumber(updateAddressDTO.getNumber());
 
-        if (updateAddressDTO.getNumber() != null)
-            existingAddress.setStreet(updateAddressDTO.getNumber());
+        if (updateAddressDTO.getNeighborhood() != null)
+            existingAddress.setNeighborhood(updateAddressDTO.getNeighborhood());
 
-        if (updateAddressDTO.getNumber() != null)
-            existingAddress.setStreet(updateAddressDTO.getNumber());
+        if (updateAddressDTO.getCity() != null)
+            existingAddress.setCity(updateAddressDTO.getCity());
 
-        if (updateAddressDTO.getNumber() != null)
-            existingAddress.setStreet(updateAddressDTO.getNumber());
+        if (updateAddressDTO.getState() != null)
+            existingAddress.setState(updateAddressDTO.getState());
 
-        if (updateAddressDTO.getNumber() != null)
-            existingAddress.setStreet(updateAddressDTO.getNumber());
-
-        if (updateAddressDTO.getNumber() != null)
-            existingAddress.setStreet(updateAddressDTO.getNumber());
-
-        if (updateAddressDTO.getNumber() != null)
-            existingAddress.setStreet(updateAddressDTO.getNumber());
-
-        // Força a sincronização da entidade e do banco de dados para garantir que o PreUpdate sejá chamado
         entityManager.merge(existingAddress);
 
         return addressMapper.toDto(addressRepository.save(existingAddress));
@@ -80,7 +72,7 @@ public class AddressService {
     //
 
     //Delete
-    public void deleteBYId(Long id) {
+    public void deleteBYId(Integer id) {
         addressRepository.deleteById(id);
     }
     //

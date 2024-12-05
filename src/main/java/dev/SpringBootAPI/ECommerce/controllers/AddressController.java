@@ -13,7 +13,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/user/{id}/address")
+@RequestMapping("/api/user/{userId}/address")
 public class AddressController {
 
     @Autowired
@@ -21,7 +21,7 @@ public class AddressController {
 
     //Create
     @PostMapping
-    public ResponseEntity<AddressDTO> createAddress(@Valid @RequestBody Address address) {
+    public ResponseEntity<AddressDTO> createAddress(@PathVariable UUID userId, @Valid @RequestBody Address address) {
         return ResponseEntity.status(201).body(addressService.createAddress(address));
     }
     //
@@ -39,8 +39,8 @@ public class AddressController {
     //
 
     //Update
-    @PutMapping
-    public ResponseEntity<AddressDTO> updateAddress(@Valid @RequestBody AddressDTO updateAddressDTO) {
+    @PutMapping("/{addressId}")
+    public ResponseEntity<AddressDTO> updateAddress(@PathVariable Long addressId, @Valid @RequestBody AddressDTO updateAddressDTO) {
         Optional<AddressDTO> existingAddressDTO = addressService.getAddressById(updateAddressDTO.getId());
 
         return existingAddressDTO.map(addressDTO -> ResponseEntity.ok(addressService.updateAddress(addressDTO, updateAddressDTO)))
@@ -50,7 +50,7 @@ public class AddressController {
 
     //Delete
     @DeleteMapping
-    public ResponseEntity<Void> deleteAddress(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteAddress(@PathVariable Integer id) {
         Optional<AddressDTO> addressDTO = addressService.getAddressById(id);
 
         if (addressDTO.isEmpty())

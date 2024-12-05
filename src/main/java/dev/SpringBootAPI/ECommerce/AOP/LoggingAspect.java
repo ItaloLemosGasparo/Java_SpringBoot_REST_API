@@ -19,7 +19,7 @@ public class LoggingAspect {
     public Object logExecutionTime(ProceedingJoinPoint joinPoint) throws Throwable {
         long start = System.currentTimeMillis();
 
-        // Obtém informações sobre o método sendo executado
+        // Obtém informações sobre o metodo sendo executado
         String methodName = joinPoint.getSignature().getName();
         String className = joinPoint.getTarget().getClass().getSimpleName();
         Object[] args = joinPoint.getArgs();
@@ -28,9 +28,9 @@ public class LoggingAspect {
 
         Object result;
         try {
-            result = joinPoint.proceed(); // Executa o método
+            result = joinPoint.proceed(); // Executa o metodo
         } catch (Exception e) {
-            // Loga a exceção com detalhes do método e da mensagem
+            // Loga a exceção com detalhes do metodo e da mensagem
             logger.error("Exception in {}.{}: {}, Args: {}", className, methodName, e.getMessage(), args, e);
             throw e; // Repassa a exceção para ser tratada em outro lugar
         }

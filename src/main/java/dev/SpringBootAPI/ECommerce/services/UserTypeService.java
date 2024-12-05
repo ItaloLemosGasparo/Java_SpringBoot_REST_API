@@ -1,7 +1,7 @@
 package dev.SpringBootAPI.ECommerce.services;
 
 import dev.SpringBootAPI.ECommerce.dtos.UserTypeDTO;
-import dev.SpringBootAPI.ECommerce.mappers.UserTypeMapper;
+import dev.SpringBootAPI.ECommerce.mappers.user.UserTypeMapper;
 import dev.SpringBootAPI.ECommerce.models.user.UserType;
 import dev.SpringBootAPI.ECommerce.repositories.UserTypeRepository;
 import jakarta.persistence.EntityManager;
@@ -28,6 +28,7 @@ public class UserTypeService {
 
     //Create
     public UserTypeDTO createUserType(@Valid UserType userType) {
+        userType.setName(userType.getName().toUpperCase());
         return userTypeMapper.toDto(userTypeRepository.save(userType));
     }
     //
@@ -48,12 +49,11 @@ public class UserTypeService {
         UserType existingUserType = userTypeMapper.toEntity(existingUserTypeDTO);
 
         if (updatedUserTypeDTO.getName() != null)
-            existingUserType.setName(updatedUserTypeDTO.getName());
+            existingUserType.setName(updatedUserTypeDTO.getName().toUpperCase());
 
         if (updatedUserTypeDTO.getDescription() != null)
             existingUserType.setDescription(updatedUserTypeDTO.getDescription());
 
-        // Força a sincronização da entidade e do banco de dados para garantir que o PreUpdate sejá chamado
         entityManager.merge(existingUserType);
 
         return userTypeMapper.toDto(userTypeRepository.save(existingUserType));

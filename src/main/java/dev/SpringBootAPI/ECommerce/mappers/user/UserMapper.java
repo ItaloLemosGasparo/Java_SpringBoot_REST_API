@@ -1,4 +1,4 @@
-package dev.SpringBootAPI.ECommerce.mappers;
+package dev.SpringBootAPI.ECommerce.mappers.user;
 
 import dev.SpringBootAPI.ECommerce.dtos.UserDTO;
 import dev.SpringBootAPI.ECommerce.models.user.User;

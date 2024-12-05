@@ -74,7 +74,7 @@ public class UserController {
     //
 
     //Delete
-    @DeleteMapping("/{id}/")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable UUID id) {
         Optional<UserDTO> userDTO = userService.findById(id);
 

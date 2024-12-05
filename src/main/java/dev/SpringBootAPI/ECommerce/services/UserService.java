@@ -1,7 +1,7 @@
 package dev.SpringBootAPI.ECommerce.services;
 
 import dev.SpringBootAPI.ECommerce.dtos.UserDTO;
-import dev.SpringBootAPI.ECommerce.mappers.UserMapper;
+import dev.SpringBootAPI.ECommerce.mappers.user.UserMapper;
 import dev.SpringBootAPI.ECommerce.models.user.Password;
 import dev.SpringBootAPI.ECommerce.models.user.User;
 import dev.SpringBootAPI.ECommerce.repositories.UserRepository;
@@ -63,7 +63,7 @@ public class UserService {
         if (updatedUserDTO.getBirthDate() != null)
             existingUser.setBirthDate(updatedUserDTO.getBirthDate());
 
-        entityManager.merge(existingUser); //force synchronization
+        entityManager.merge(existingUser);
 
         return userMapper.toDto(userRepository.save(existingUser));
     }

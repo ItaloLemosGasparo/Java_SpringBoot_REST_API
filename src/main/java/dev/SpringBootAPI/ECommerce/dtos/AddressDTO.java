@@ -10,7 +10,7 @@ import java.util.UUID;
 @Data
 public class AddressDTO {
 
-    private Long id;
+    private Integer id;
 
     @NotNull(message = "O CEP não pode ser nulo.")
     @Pattern(regexp = "\\d{5}-\\d{3}", message = "O CEP deve estar no formato 00000-000.")

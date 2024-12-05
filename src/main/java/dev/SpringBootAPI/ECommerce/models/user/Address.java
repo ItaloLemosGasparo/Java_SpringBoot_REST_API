@@ -14,7 +14,7 @@ public class Address {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @NotNull(message = "O CEP não pode ser nulo.")
     @ValidZipcode(message = "O CEP deve estar no formato 00000-000.")
