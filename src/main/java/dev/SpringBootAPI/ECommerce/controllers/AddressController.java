@@ -22,14 +22,14 @@ public class AddressController {
     //Create
     @PostMapping
     public ResponseEntity<AddressDTO> createAddress(@PathVariable UUID userId, @Valid @RequestBody Address address) {
-        return ResponseEntity.status(201).body(addressService.createAddress(address));
+        return ResponseEntity.status(201).body(addressService.createAddress(userId, address));
     }
     //
 
     //Read
     @GetMapping
-    public ResponseEntity<List<AddressDTO>> getAddressesByUserId(@PathVariable UUID id) {
-        List<AddressDTO> addressesDTOs = addressService.getAddressesByUserId(id);
+    public ResponseEntity<List<AddressDTO>> getAddressesByUserId(@PathVariable UUID userId) {
+        List<AddressDTO> addressesDTOs = addressService.getAddressesByUserId(userId);
 
         if (addressesDTOs.isEmpty())
             return ResponseEntity.noContent().build();
@@ -40,8 +40,8 @@ public class AddressController {
 
     //Update
     @PutMapping("/{addressId}")
-    public ResponseEntity<AddressDTO> updateAddress(@PathVariable Long addressId, @Valid @RequestBody AddressDTO updateAddressDTO) {
-        Optional<AddressDTO> existingAddressDTO = addressService.getAddressById(updateAddressDTO.getId());
+    public ResponseEntity<AddressDTO> updateAddress(@PathVariable Integer addressId, @Valid @RequestBody AddressDTO updateAddressDTO) {
+        Optional<AddressDTO> existingAddressDTO = addressService.getAddressById(addressId);
 
         return existingAddressDTO.map(addressDTO -> ResponseEntity.ok(addressService.updateAddress(addressDTO, updateAddressDTO)))
                 .orElseGet(() -> ResponseEntity.notFound().build());

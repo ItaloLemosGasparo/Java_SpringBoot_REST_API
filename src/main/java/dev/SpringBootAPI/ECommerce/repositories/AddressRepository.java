@@ -9,5 +9,5 @@ import java.util.UUID;
 
 @Repository
 public interface AddressRepository extends JpaRepository<Address, Integer> {
-    List<Address> findAllByUserId(UUID userId);
+    List<Address> findAllByUser_Id(UUID userId);
 }

@@ -27,18 +27,18 @@ public class AddressService {
     EntityManager entityManager;
 
     //Create
-    public AddressDTO createAddress(Address address) {
+    public AddressDTO createAddress(UUID userId, Address address) {
         return addressMapper.toDto(addressRepository.save(address));
     }
     //
 
     //Read
-    public Optional<AddressDTO> getAddressById(Integer id) {
-        return addressRepository.findById(id).map(addressMapper::toDto);
+    public List<AddressDTO> getAddressesByUserId(UUID userId) {
+        return addressRepository.findAllByUser_Id(userId).stream().map(addressMapper::toDto).collect(Collectors.toList());
     }
 
-    public List<AddressDTO> getAddressesByUserId(UUID userId) {
-        return addressRepository.findAllByUserId(userId).stream().map(addressMapper::toDto).collect(Collectors.toList());
+    public Optional<AddressDTO> getAddressById(Integer id) {
+        return addressRepository.findById(id).map(addressMapper::toDto);
     }
     //
 
