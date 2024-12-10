@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 public class UserTypeDTO {
-    private int id;
+    private Integer id;
 
     @NotNull(message = "O nome não pode ser nulo.")
     @Size(min = 3, max = 100, message = "O nome deve ter entre 3 e 100 caracteres.")

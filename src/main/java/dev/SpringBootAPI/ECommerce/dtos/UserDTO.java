@@ -34,5 +34,5 @@ public class UserDTO {
     @PastOrPresent(message = "A data de atualização deve ser no passado ou presente.")
     private LocalDate updatedAt;
 
-    private UserTypeDTO userType;
+    private Integer userType;
 }

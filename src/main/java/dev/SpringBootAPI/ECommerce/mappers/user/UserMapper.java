@@ -11,7 +11,9 @@ public interface UserMapper {
     UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
 
     @Mapping(target = "url", expression = "java(\"http://localhost:8080/api/user/\" + user.getId())")
+    @Mapping(source = "userType.id", target = "userType")
     UserDTO toDto(User user);
 
+    @Mapping(source = "userType", target = "userType.id")
     User toEntity(UserDTO userDTO);
 }

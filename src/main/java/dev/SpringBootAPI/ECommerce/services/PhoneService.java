@@ -55,12 +55,11 @@ public class PhoneService {
 
         return phoneMapper.toDTO(phoneRepository.save(existingPhone));
     }
-
-    public void deletePhone(Long id) {
-        phoneRepository.deleteById(id);
-    }
     //
 
     //Delete
+    public void deletePhone(Long id) {
+        phoneRepository.deleteById(id);
+    }
     //
 }

@@ -1,5 +1,6 @@
 package dev.SpringBootAPI.ECommerce.models.user;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import dev.SpringBootAPI.ECommerce.models.product.Product;
 import dev.SpringBootAPI.ECommerce.validators.cpf.ValidCpf;
 import jakarta.persistence.*;
@@ -8,14 +9,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 
-import java.rmi.server.UID;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode(exclude = "password")
 @Entity // Define a classe como uma entidade JPA
 @Table(name = "Users") // Define o nome da tabela no banco de dados
@@ -50,6 +51,7 @@ public class User {
 
     @NotNull(message = "A data de nascimento não pode ser nula.")
     @Past(message = "A data de nascimento deve ser uma data passada.")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthDate;
 
     // Definindo a chave estrangeira para o UserType
@@ -61,9 +63,11 @@ public class User {
     private Boolean active = true;
 
     @PastOrPresent(message = "A data de criação deve ser no passado ou presente.")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate createdAt;
 
     @PastOrPresent(message = "A data de atualização deve ser no passado ou presente.")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate updatedAt;
 
     //Referencias de outras tabelas para User
