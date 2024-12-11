@@ -1,6 +1,6 @@
 package dev.SpringBootAPI.ECommerce.mappers.user;
 
-import dev.SpringBootAPI.ECommerce.dtos.UserDTO;
+import dev.SpringBootAPI.ECommerce.dtos.user.UserDTO;
 import dev.SpringBootAPI.ECommerce.models.user.User;
 import dev.SpringBootAPI.ECommerce.models.user.UserType;
 import javax.annotation.processing.Generated;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-12-09T21:08:01-0300",
+    date = "2024-12-10T21:10:08-0300",
     comments = "version: 1.5.3.Final, compiler: javac, environment: Java 23.0.1 (Oracle Corporation)"
 )
 @Component

@@ -1,9 +1,9 @@
 package dev.SpringBootAPI.ECommerce.controllers;
 
-import dev.SpringBootAPI.ECommerce.dtos.UserDTO;
+import dev.SpringBootAPI.ECommerce.dtos.user.UserDTO;
 import dev.SpringBootAPI.ECommerce.models.user.Password;
 import dev.SpringBootAPI.ECommerce.models.user.User;
-import dev.SpringBootAPI.ECommerce.services.UserService;
+import dev.SpringBootAPI.ECommerce.services.user.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

@@ -1,6 +1,6 @@
-package dev.SpringBootAPI.ECommerce.services;
+package dev.SpringBootAPI.ECommerce.services.user;
 
-import dev.SpringBootAPI.ECommerce.dtos.PhoneDTO;
+import dev.SpringBootAPI.ECommerce.dtos.user.PhoneDTO;
 import dev.SpringBootAPI.ECommerce.mappers.user.PhoneMapper;
 import dev.SpringBootAPI.ECommerce.models.user.Phone;
 import dev.SpringBootAPI.ECommerce.repositories.PhoneRepository;

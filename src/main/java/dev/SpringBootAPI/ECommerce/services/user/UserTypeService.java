@@ -1,6 +1,6 @@
-package dev.SpringBootAPI.ECommerce.services;
+package dev.SpringBootAPI.ECommerce.services.user;
 
-import dev.SpringBootAPI.ECommerce.dtos.UserTypeDTO;
+import dev.SpringBootAPI.ECommerce.dtos.user.UserTypeDTO;
 import dev.SpringBootAPI.ECommerce.mappers.user.UserTypeMapper;
 import dev.SpringBootAPI.ECommerce.models.user.UserType;
 import dev.SpringBootAPI.ECommerce.repositories.UserTypeRepository;

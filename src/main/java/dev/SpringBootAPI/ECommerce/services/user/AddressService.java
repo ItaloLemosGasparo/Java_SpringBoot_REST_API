@@ -1,6 +1,6 @@
-package dev.SpringBootAPI.ECommerce.services;
+package dev.SpringBootAPI.ECommerce.services.user;
 
-import dev.SpringBootAPI.ECommerce.dtos.AddressDTO;
+import dev.SpringBootAPI.ECommerce.dtos.user.AddressDTO;
 import dev.SpringBootAPI.ECommerce.mappers.user.AddressMapper;
 import dev.SpringBootAPI.ECommerce.models.user.Address;
 import dev.SpringBootAPI.ECommerce.repositories.AddressRepository;

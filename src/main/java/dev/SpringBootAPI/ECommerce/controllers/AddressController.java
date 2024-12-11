@@ -1,8 +1,8 @@
 package dev.SpringBootAPI.ECommerce.controllers;
 
-import dev.SpringBootAPI.ECommerce.dtos.AddressDTO;
+import dev.SpringBootAPI.ECommerce.dtos.user.AddressDTO;
 import dev.SpringBootAPI.ECommerce.models.user.Address;
-import dev.SpringBootAPI.ECommerce.services.AddressService;
+import dev.SpringBootAPI.ECommerce.services.user.AddressService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

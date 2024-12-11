@@ -1,6 +1,5 @@
-package dev.SpringBootAPI.ECommerce.dtos;
+package dev.SpringBootAPI.ECommerce.dtos.user;
 
-import dev.SpringBootAPI.ECommerce.validators.cpf.ValidCpf;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 

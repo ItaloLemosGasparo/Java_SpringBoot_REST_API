@@ -1,13 +1,12 @@
-package dev.SpringBootAPI.ECommerce.services;
+package dev.SpringBootAPI.ECommerce.services.user;
 
-import dev.SpringBootAPI.ECommerce.dtos.UserDTO;
+import dev.SpringBootAPI.ECommerce.dtos.user.UserDTO;
 import dev.SpringBootAPI.ECommerce.mappers.user.UserMapper;
 import dev.SpringBootAPI.ECommerce.models.user.Password;
 import dev.SpringBootAPI.ECommerce.models.user.User;
 import dev.SpringBootAPI.ECommerce.repositories.UserRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

@@ -1,7 +1,7 @@
 package dev.SpringBootAPI.ECommerce.mappers.user;
 
 import dev.SpringBootAPI.ECommerce.models.user.Phone;
-import dev.SpringBootAPI.ECommerce.dtos.PhoneDTO;
+import dev.SpringBootAPI.ECommerce.dtos.user.PhoneDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;

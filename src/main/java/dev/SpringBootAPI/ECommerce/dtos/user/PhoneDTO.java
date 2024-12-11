@@ -1,4 +1,4 @@
-package dev.SpringBootAPI.ECommerce.dtos;
+package dev.SpringBootAPI.ECommerce.dtos.user;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;

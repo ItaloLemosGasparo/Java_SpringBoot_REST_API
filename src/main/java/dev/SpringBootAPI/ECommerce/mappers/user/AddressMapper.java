@@ -1,6 +1,6 @@
 package dev.SpringBootAPI.ECommerce.mappers.user;
 
-import dev.SpringBootAPI.ECommerce.dtos.AddressDTO;
+import dev.SpringBootAPI.ECommerce.dtos.user.AddressDTO;
 import dev.SpringBootAPI.ECommerce.models.user.Address;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

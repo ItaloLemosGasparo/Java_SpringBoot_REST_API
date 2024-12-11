@@ -1,7 +1,7 @@
 package dev.SpringBootAPI.ECommerce.controllers;
 
-import dev.SpringBootAPI.ECommerce.dtos.PhoneDTO;
-import dev.SpringBootAPI.ECommerce.services.PhoneService;
+import dev.SpringBootAPI.ECommerce.dtos.user.PhoneDTO;
+import dev.SpringBootAPI.ECommerce.services.user.PhoneService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
