@@ -23,13 +23,13 @@ public class UserType {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotNull(message = "O nome não pode ser nulo.")
-    @Size(min = 3, max = 100, message = "O nome deve ter entre 3 e 100 caracteres.")
+    @NotNull(message = "The name can't be null.")
+    @Size(min = 3, max = 100, message = "The name must have between 3 and 100 characters.")
     @Column(nullable = false, length = 100)
     private String name;
 
-    @NotNull(message = "A descrição não pode ser nula.")
-    @Size(min = 3, max = 255, message = "A descrição deve ter entre 3 e 255 caracteres.")
+    @NotNull(message = "The description can't be null.")
+    @Size(min = 3, max = 255, message = "The description must have between 3 and 255 characters.")
     @Column(nullable = false, length = 255)
     private String description;
 

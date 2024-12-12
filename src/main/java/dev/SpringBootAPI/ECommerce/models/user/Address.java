@@ -16,37 +16,38 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotNull(message = "O CEP não pode ser nulo.")
-    @ValidZipcode(message = "O CEP deve estar no formato 00000-000.")
+    @NotNull(message = "The CEP can't be null.")
+    @ValidZipcode(message = "The CEP must follow the following pattern 00000-000.")
     @Column(nullable = false, length = 9)
     private String zipCode;
 
-    @NotNull(message = "O logradouro não pode ser nulo.")
-    @Size(min = 3, max = 255, message = "O logradouro deve ter entre 3 e 255 caracteres.")
+    @NotNull(message = "The street can't be null.")
+    @Size(min = 3, max = 255, message = "The street must have between 3 and 255 characters.")
     @Column(nullable = false, length = 255)
     private String street;
 
-    @Size(min = 3, max = 100, message = "O complemento deve ter entre 3 e 100 caracteres.")
+    @Size(min = 3, max = 100, message = "The complement must have between 3 and 100 characters.")
     @Column(nullable = true, length = 100)
     private String complement;
 
-    @NotNull(message = "O número não pode ser nulo.")
-    @Size(max = 6, message = "O número deve ter no máximo 6 caracteres.")
+    @NotNull(message = "The number can't be null.")
+    @Size(max = 6, message = "The number can have only 6 characters at the maximum.")
     @Column(nullable = false, length = 6)
     private String number;
 
-    @NotNull(message = "O bairro não pode ser nulo.")
-    @Size(min = 3, max = 255, message = "O bairro deve ter entre 3 e 255 caracteres.")
+    @NotNull(message = "The neighborhood can't be null.")
+    @Size(min = 3, max = 255, message = "The neighborhood must have between 3 and 100 characters.")
     @Column(nullable = false, length = 255)
     private String neighborhood;
 
-    @NotNull(message = "A cidade não pode ser nula.")
-    @Size(min = 3, max = 150, message = "A cidade deve ter entre 3 e 150 caracteres.")
+    @NotNull(message = "The city can't be null.")
+    @Size(min = 3, max = 150, message = "The city must have between 3 and 100 characters.")
     @Column(nullable = false, length = 150)
     private String city;
 
-    @NotNull(message = "O estado/UF não pode ser nulo.")
-    @Pattern(regexp = "^[A-Z]{2}$", message = "O estado/UF deve ser composta por duas letras maiúsculas.")
+    @NotNull(message = "The UF can't be null.")
+    @Pattern(regexp = "^[A-Z]{2}$", message = "The state/UF must consist of exactly two uppercase letters.")
+
     @Column(nullable = false, length = 2)
     private String state;
 

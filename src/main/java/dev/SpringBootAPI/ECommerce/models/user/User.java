@@ -27,46 +27,46 @@ public class User {
     @Column(name = "id", columnDefinition = "UUID", updatable = false, nullable = false)
     private UUID id;
 
-    @NotNull(message = "O nome não pode ser nulo.")
-    @Size(min = 3, max = 100, message = "O nome deve ter entre 3 e 100 caracteres.")
-    @Pattern(regexp = "^[A-Za-zÀ-ÿ\\s]+$", message = "O nome só pode conter letras e espaços.")
+    @NotNull(message = "The name can't be null.")
+    @Size(min = 3, max = 100, message = "The name must have between 3 to 100 characters.")
+    @Pattern(regexp = "^[A-Za-zÀ-ÿ\\s]+$", message = "The name can only contain letters and spaces.")
     @Column(nullable = false, length = 100) // Define as caracteristicas da coluna no banco
     private String name;
 
-    @NotNull(message = "O email não pode ser nulo.")
-    @Email(message = "O email deve ser válido.")
-    @Size(max = 100, message = "O email deve ter no maximo 100 caracteres.")
+    @NotNull(message = "The email can't be null.")
+    @Email(message = "Invalid email.")
+    @Size(max = 100, message = "The email can have a maximum of 100 characters.")
     @Column(unique = true, nullable = false, length = 100)
     private String email;
 
-    @NotNull(message = "A senha não pode ser nula.")
-    @Pattern(regexp = "(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]).{8,}", message = "A senha deve ter no mínimo 8 caracteres, incluindo letras, números e caracteres especiais.")
+    @NotNull(message = "The password can't be null.")
+    @Pattern(regexp = "(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]).{8,}", message = "The password must have at least 8 characters and include letters, numbers, and special characters.")
     @Column(nullable = false)
     private String password;
 
-    @NotNull(message = "O CPF não pode ser nulo.")
-    @ValidCpf(message = "CPF inválido.")
+    @NotNull(message = "The CPF can't be null.")
+    @ValidCpf(message = "Invalid CPF.")
     @Column(unique = true, nullable = false)
     private String cpf;
 
-    @NotNull(message = "A data de nascimento não pode ser nula.")
-    @Past(message = "A data de nascimento deve ser uma data passada.")
+    @NotNull(message = "The birth date can't be null.")
+    @Past(message = "The birth date must be in the past.")
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthDate;
 
     // Definindo a chave estrangeira para o UserType
-    @NotNull(message = "O tipo de usuário não pode ser nulo.")
+    @NotNull(message = "UserType can't be null.")
     @ManyToOne
     @JoinColumn(name = "userType_id", nullable = false)
     private UserType userType;
 
     private Boolean active = true;
 
-    @PastOrPresent(message = "A data de criação deve ser no passado ou presente.")
+    @PastOrPresent(message = "The 'created at' date must be in the past or present.")
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate createdAt;
 
-    @PastOrPresent(message = "A data de atualização deve ser no passado ou presente.")
+    @PastOrPresent(message = "The 'updated at' date must be in the past or present.")
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate updatedAt;
 

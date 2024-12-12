@@ -1,5 +1,6 @@
 package dev.SpringBootAPI.ECommerce.dtos.user;
 
+import dev.SpringBootAPI.ECommerce.validators.address.ValidZipcode;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
@@ -12,31 +13,25 @@ public class AddressDTO {
 
     private Integer id;
 
-    @NotNull(message = "O CEP não pode ser nulo.")
-    @Pattern(regexp = "\\d{5}-\\d{3}", message = "O CEP deve estar no formato 00000-000.")
+    @ValidZipcode(message = "The CEP must follow the following pattern 00000-000.")
     private String zipCode;
 
-    @NotNull(message = "O logradouro não pode ser nulo.")
-    @Size(min = 3, max = 255, message = "O logradouro deve ter entre 3 e 255 caracteres.")
+    @Size(min = 3, max = 255, message = "The street must have between 3 and 255 characters.")
     private String street;
 
-    @Size(max = 100, message = "O complemento deve ter no máximo 100 caracteres.")
+    @Size(min = 3, max = 100, message = "The complement must have between 3 and 100 characters.")
     private String complement;
 
-    @NotNull(message = "O número não pode ser nulo.")
-    @Size(max = 6, message = "O número deve ter no máximo 6 caracteres.")
+    @Size(max = 6, message = "The number can have only 6 characters at the maximum.")
     private String number;
 
-    @NotNull(message = "O bairro não pode ser nulo.")
-    @Size(min = 3, max = 255, message = "O bairro deve ter entre 3 e 255 caracteres.")
+    @Size(min = 3, max = 255, message = "The neighborhood must have between 3 and 100 characters.")
     private String neighborhood;
 
-    @NotNull(message = "A cidade não pode ser nula.")
-    @Size(min = 3, max = 150, message = "A cidade deve ter entre 3 e 150 caracteres.")
+    @Size(min = 3, max = 150, message = "The city must have between 3 and 100 characters.")
     private String city;
 
-    @NotNull(message = "O estado/UF não pode ser nulo.")
-    @Pattern(regexp = "^[A-Z]{2}$", message = "O estado/UF deve ser composta por duas letras maiúsculas.")
+    @Pattern(regexp = "^[A-Z]{2}$", message = "The state/UF must consist of exactly two uppercase letters.")
     private String state;
 
     private UUID userId;

@@ -1,5 +1,6 @@
 package dev.SpringBootAPI.ECommerce.dtos.user;
 
+import dev.SpringBootAPI.ECommerce.validators.cpf.ValidCpf;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 
@@ -10,27 +11,25 @@ import java.util.UUID;
 public class UserDTO {
     private UUID id;
 
-    @Pattern(regexp = "^[A-Za-zÀ-ÿ\\s]+$", message = "O nome só pode conter letras e espaços.")
-    @Size(min = 3, max = 100, message = "O nome deve ter entre 3 e 100 caracteres.")
+    @Size(min = 3, max = 100, message = "The name must have between 3 to 100 characters.")
+    @Pattern(regexp = "^[A-Za-zÀ-ÿ\\s]+$", message = "The name can only contain letters and spaces.")
     private String name;
 
-    @Email(message = "O email deve ser válido.")
-    @Size(max = 100, message = "O email deve ter no máximo 100 caracteres.")
+    @Email(message = "Invalid email.")
+    @Size(max = 100, message = "The email can have a maximum of 100 characters.")
     private String email;
 
-    private String cpf;
-
-    @Past(message = "A data de nascimento deve ser uma data passada.")
+    @Past(message = "The birth date must be in the past.")
     private LocalDate birthDate;
 
     private Boolean active;
 
     private String url;
 
-    @PastOrPresent(message = "A data de criação deve ser no passado ou presente.")
+    @PastOrPresent(message = "The 'created at' date must be in the past or present.")
     private LocalDate createdAt;
 
-    @PastOrPresent(message = "A data de atualização deve ser no passado ou presente.")
+    @PastOrPresent(message = "The 'updated at' date must be in the past or present.")
     private LocalDate updatedAt;
 
     private Integer userType;

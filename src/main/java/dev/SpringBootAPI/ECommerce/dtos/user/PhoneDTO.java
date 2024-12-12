@@ -11,12 +11,10 @@ public class PhoneDTO {
 
     private Long id;
 
-    @NotNull(message = "O DDD não pode ser nulo.")
-    @Pattern(regexp = "^\\d{2}$", message = "O DDD deve ter exatamente 2 dígitos.")
+    @Pattern(regexp = "^\\d{2}$", message = "The DDD must be exactly 2 digits")
     private String ddd;
 
-    @NotNull(message = "O número de telefone não pode ser nulo.")
-    @Pattern(regexp = "^\\d{8,9}$", message = "O número de telefone deve ter entre 8 e 9 dígitos.")
+    @Pattern(regexp = "^\\d{8,9}$", message = "The phone number must have 8 or 9 digits")
     private String number;
 
     private boolean confirmed = false;

@@ -12,15 +12,15 @@ public class ProductImages {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
-    @NotNull(message = "A URL da imagem não pode ser nula.")
-    @Size(max = 255, message = "A URL da imagem deve ter no máximo 255 caracteres.")
+    @NotNull(message = "The image URL cannot be null.")
+    @Size(max = 255, message = "The image URL must have a maximum of 255 characters.")
     @Column(nullable = false, length = 255)
     private String url;
 
-    @NotNull(message = "O tipo da imagem não pode ser nulo.")
-    @Size(max = 50, message = "O tipo da imagem deve ter no máximo 50 caracteres.")
+    @NotNull(message = "The image type cannot be null.")
+    @Size(max = 50, message = "The image type must have a maximum of 50 characters.")
     @Column(nullable = false, length = 50)
     private String type;
 

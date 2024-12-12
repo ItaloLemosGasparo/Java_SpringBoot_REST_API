@@ -7,8 +7,8 @@ import lombok.Data;
 
 @Data
 public class Password {
-    @NotNull(message = "A senha não pode ser nula.")
-    @Pattern(regexp = "(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]).{8,}", message = "A senha deve ter no mínimo 8 caracteres, incluindo letras, números e caracteres especiais.")
+    @NotNull(message = "The password can't be null")
+    @Pattern(regexp = "(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]).{8,}", message = "The password must have at least 8 characters and include letters, numbers, and special characters.")
     @Column(nullable = false)
     private String password;
 }

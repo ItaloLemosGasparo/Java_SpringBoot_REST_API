@@ -17,18 +17,18 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "O nome não pode ser nulo.")
-    @Size(min = 3, max = 100, message = "O nome deve ter entre 3 e 100 caracteres.")
+    @NotNull(message = "The name can't be null.")
+    @Size(min = 3, max = 100, message = "The name must have between 3 and 100 characters.")
     @Column(nullable = false, length = 100)
     private String name;
 
-    @NotNull(message = "A descrição não pode ser nula.")
-    @Size(min = 100, max = 2000, message = "A descrição deve ter entre 100 e 2000 caracteres.")
+    @NotNull(message = "The description can't be null.")
+    @Size(min = 100, max = 2000, message = "The description must have between 100 and 2000 characters.")
     @Column(nullable = false, length = 2000)
     private String description;
 
-    @NotNull(message = "O ícone não pode ser nulo.")
-    @Size(max = 255, message = "A URL do ícone deve ter no máximo 255 caracteres.")
+    @NotNull(message = "The \"iconUrl\" can't be null.")
+    @Size(max = 255, message = "The \"iconUrl\" can have 255 characters at maximum.")
     @Column(nullable = false, length = 255)
     private String iconUrl;
 

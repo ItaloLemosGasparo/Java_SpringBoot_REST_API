@@ -8,11 +8,9 @@ import lombok.Data;
 public class UserTypeDTO {
     private Integer id;
 
-    @NotNull(message = "O nome não pode ser nulo.")
-    @Size(min = 3, max = 100, message = "O nome deve ter entre 3 e 100 caracteres.")
+    @Size(min = 3, max = 100, message = "The name must have between 3 and 100 characters.")
     private String name;
 
-    @NotNull(message = "A descrição não pode ser nula.")
-    @Size(min = 3, max = 255, message = "A descrição deve ter entre 3 e 255 caracteres.")
+    @Size(min = 3, max = 255, message = "The description must have between 3 and 255 characters.")
     private String description;
 }

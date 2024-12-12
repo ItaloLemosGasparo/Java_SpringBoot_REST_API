@@ -13,13 +13,13 @@ public class Phone {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "O DDD não pode ser nulo.")
-    @Pattern(regexp = "^\\d{2}$", message = "O DDD deve ter exatamente 2 dígitos.")
+    @NotNull(message = "The DDD can't be null.")
+    @Pattern(regexp = "^\\d{2}$", message = "The DDD must be exactly 2 digits")
     @Column(nullable = false, length = 2)
     private String ddd;
 
-    @NotNull(message = "O número de telefone não pode ser nulo.")
-    @Pattern(regexp = "^\\d{8,9}$", message = "O número de telefone deve ter entre 8 e 9 dígitos.")
+    @NotNull(message = "The phone number can't be null.")
+    @Pattern(regexp = "^\\d{8,9}$", message = "The phone number must have 8 or 9 digits")
     @Column(nullable = false, length = 9)
     private String number;
 
