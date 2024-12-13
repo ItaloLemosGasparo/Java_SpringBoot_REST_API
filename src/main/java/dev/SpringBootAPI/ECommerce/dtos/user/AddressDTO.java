@@ -1,14 +1,15 @@
 package dev.SpringBootAPI.ECommerce.dtos.user;
 
 import dev.SpringBootAPI.ECommerce.validators.address.ValidZipcode;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.UUID;
 
-@Data
+@Getter
+@Setter
 public class AddressDTO {
 
     private Integer id;

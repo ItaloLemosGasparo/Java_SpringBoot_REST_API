@@ -18,8 +18,8 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(exclude = "password")
-@Entity // Define a classe como uma entidade JPA
-@Table(name = "Users") // Define o nome da tabela no banco de dados
+@Entity
+@Table(name = "Users")
 public class User {
 
     @Id
@@ -30,7 +30,7 @@ public class User {
     @NotNull(message = "The name can't be null.")
     @Size(min = 3, max = 100, message = "The name must have between 3 to 100 characters.")
     @Pattern(regexp = "^[A-Za-zÀ-ÿ\\s]+$", message = "The name can only contain letters and spaces.")
-    @Column(nullable = false, length = 100) // Define as caracteristicas da coluna no banco
+    @Column(nullable = false, length = 100)
     private String name;
 
     @NotNull(message = "The email can't be null.")
@@ -71,14 +71,11 @@ public class User {
     private LocalDate updatedAt;
 
     //Referencias de outras tabelas para User
-    @OneToMany(mappedBy = "user") // Define o relacionamento um-para-muitos com a entidade Address
+    @OneToMany(mappedBy = "user")
     private List<Address> address;
 
-    @OneToMany(mappedBy = "user") // Define o relacionamento um-para-muitos com a entidade Phone
+    @OneToMany(mappedBy = "user")
     private List<Phone> phone;
-
-    @OneToMany(mappedBy = "seller") // Define o relacionamento um-para-muitos com a entidade Product
-    private List<Product> product;
     //
 
     @PrePersist

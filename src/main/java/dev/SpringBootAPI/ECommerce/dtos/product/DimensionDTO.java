@@ -1,17 +1,14 @@
-package dev.SpringBootAPI.ECommerce.models.product;
+package dev.SpringBootAPI.ECommerce.dtos.product;
 
-import jakarta.persistence.Embeddable;
 import jakarta.validation.constraints.DecimalMin;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-@Embeddable
-@AllArgsConstructor
-public class Dimension {
+@NoArgsConstructor
+public class DimensionDTO {
 
     @DecimalMin(value = "0.0", inclusive = false, message = "The width must be greater than 0.")
     private double width;
@@ -21,4 +18,5 @@ public class Dimension {
 
     @DecimalMin(value = "0.0", inclusive = false, message = "The depth must be greater than 0.")
     private double depth;
+
 }

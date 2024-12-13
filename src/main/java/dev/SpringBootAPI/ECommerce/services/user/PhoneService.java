@@ -3,7 +3,7 @@ package dev.SpringBootAPI.ECommerce.services.user;
 import dev.SpringBootAPI.ECommerce.dtos.user.PhoneDTO;
 import dev.SpringBootAPI.ECommerce.mappers.user.PhoneMapper;
 import dev.SpringBootAPI.ECommerce.models.user.Phone;
-import dev.SpringBootAPI.ECommerce.repositories.PhoneRepository;
+import dev.SpringBootAPI.ECommerce.repositories.user.PhoneRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

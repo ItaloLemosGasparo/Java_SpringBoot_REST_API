@@ -1,4 +1,4 @@
-package dev.SpringBootAPI.ECommerce.repositories;
+package dev.SpringBootAPI.ECommerce.repositories.user;
 
 import dev.SpringBootAPI.ECommerce.models.user.Address;
 import org.springframework.data.jpa.repository.JpaRepository;

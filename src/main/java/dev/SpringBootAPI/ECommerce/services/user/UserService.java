@@ -4,7 +4,7 @@ import dev.SpringBootAPI.ECommerce.dtos.user.UserDTO;
 import dev.SpringBootAPI.ECommerce.mappers.user.UserMapper;
 import dev.SpringBootAPI.ECommerce.models.user.Password;
 import dev.SpringBootAPI.ECommerce.models.user.User;
-import dev.SpringBootAPI.ECommerce.repositories.UserRepository;
+import dev.SpringBootAPI.ECommerce.repositories.user.UserRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;

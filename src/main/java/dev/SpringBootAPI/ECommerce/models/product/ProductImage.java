@@ -1,14 +1,17 @@
 package dev.SpringBootAPI.ECommerce.models.product;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "ProductImages")
-public class ProductImages {
+public class ProductImage {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +27,8 @@ public class ProductImages {
     @Column(nullable = false, length = 50)
     private String type;
 
-    @Column
+    @Column(nullable = false)
+    @Min(value = 0)
     private Integer position;
 
     @ManyToOne

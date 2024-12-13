@@ -1,14 +1,16 @@
 package dev.SpringBootAPI.ECommerce.dtos.user;
 
-import dev.SpringBootAPI.ECommerce.validators.cpf.ValidCpf;
 import jakarta.validation.constraints.*;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.UUID;
 
-@Data
+@Getter
+@Setter
 public class UserDTO {
+
     private UUID id;
 
     @Size(min = 3, max = 100, message = "The name must have between 3 to 100 characters.")

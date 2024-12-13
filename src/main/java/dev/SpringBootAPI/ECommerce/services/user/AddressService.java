@@ -3,7 +3,7 @@ package dev.SpringBootAPI.ECommerce.services.user;
 import dev.SpringBootAPI.ECommerce.dtos.user.AddressDTO;
 import dev.SpringBootAPI.ECommerce.mappers.user.AddressMapper;
 import dev.SpringBootAPI.ECommerce.models.user.Address;
-import dev.SpringBootAPI.ECommerce.repositories.AddressRepository;
+import dev.SpringBootAPI.ECommerce.repositories.user.AddressRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;

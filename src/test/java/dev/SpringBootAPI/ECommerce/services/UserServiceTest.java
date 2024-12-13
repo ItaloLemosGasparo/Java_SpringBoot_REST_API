@@ -3,7 +3,7 @@ package dev.SpringBootAPI.ECommerce.services;
 import dev.SpringBootAPI.ECommerce.dtos.user.UserDTO;
 import dev.SpringBootAPI.ECommerce.mappers.user.UserMapper;
 import dev.SpringBootAPI.ECommerce.models.user.User;
-import dev.SpringBootAPI.ECommerce.repositories.UserRepository;
+import dev.SpringBootAPI.ECommerce.repositories.user.UserRepository;
 import dev.SpringBootAPI.ECommerce.services.user.UserService;
 import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;

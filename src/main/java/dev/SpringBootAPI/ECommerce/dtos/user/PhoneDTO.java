@@ -1,12 +1,13 @@
 package dev.SpringBootAPI.ECommerce.dtos.user;
 
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.UUID;
 
-@Data
+@Getter
+@Setter
 public class PhoneDTO {
 
     private Long id;
