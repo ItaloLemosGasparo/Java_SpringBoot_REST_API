@@ -1,9 +1,12 @@
 package dev.SpringBootAPI.ECommerce.services.product;
 
+import dev.SpringBootAPI.ECommerce.dtos.product.CategoryDTO;
 import dev.SpringBootAPI.ECommerce.dtos.product.CategoryPathDTO;
+import dev.SpringBootAPI.ECommerce.mappers.product.CategoryMapper;
+import dev.SpringBootAPI.ECommerce.mappers.product.CategoryPathMapper;
 import dev.SpringBootAPI.ECommerce.models.product.Category;
 import dev.SpringBootAPI.ECommerce.repositories.product.CategoryRepository;
-import dev.SpringBootAPI.ECommerce.mappers.product.CategoryPathMapper;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,38 +20,48 @@ public class CategoryService {
     private CategoryRepository categoryRepository;
 
     @Autowired
+    private CategoryMapper categoryMapper;
+
+    @Autowired
     private CategoryPathMapper categoryPathMapper;
 
+    //Create
+    public CategoryDTO createCategory(@Valid Category category) {
+        return categoryMapper.toDto(categoryRepository.save(category));
+    }
+    //
+
+    //Read
+
+    //
+
+    public List<CategoryDTO> getCategories() {
+        return categoryRepository.findAll().stream()
+                .map(categoryMapper::toDto)
+                .toList();
+    }
+
+    public List<CategoryDTO> getTopCategories() {
+        return categoryRepository.findByParentCategoryIsNull().stream()
+                .map(categoryMapper::toDto)
+                .toList();
+    }
+
     public List<CategoryPathDTO> getCategoryPath(Long categoryId) {
-        List<Object[]> result = categoryRepository.findCategoryPath(categoryId);
-        List<CategoryPathDTO> categoryPath = new ArrayList<>();
-
-        // Mapear os dados da consulta usando o mapper
-        for (Object[] row : result) {
-            Long id = (Long) row[0];
-            Category category = getCategory(row, id);
-
-            categoryPath.add(categoryPathMapper.toDto(category));
-        }
-
-        return categoryPath;
+        Category category = categoryRepository.findById(categoryId).orElseThrow(
+                () -> new RuntimeException("Category not found with id: " + categoryId)
+        );
+        return getCategoryPathIterative(category);
     }
 
-    private static Category getCategory(Object[] row, Long id) {
-        String name = (String) row[1];
-        Long previousCategoryId = (Long) row[2];
-
-        // Criando a instância de Category e setando os valores
-        Category category = new Category();
-        category.setId(id);
-        category.setName(name);
-
-        // Setando a categoria anterior, se houver
-        if (previousCategoryId != null) {
-            Category previousCategory = new Category();
-            previousCategory.setId(previousCategoryId);
-            category.setPreviousCategory(previousCategory);
+    private List<CategoryPathDTO> getCategoryPathIterative(Category category) {
+        List<Category> path = new ArrayList<>();
+        while (category != null) {
+            path.add(0, category); // Insere no início para construir o caminho da raiz à folha
+            category = category.getParentCategory();
         }
-        return category;
+        return path.stream().map(categoryPathMapper::toDto).toList();
     }
+
+
 }

@@ -1,6 +1,7 @@
-package dev.SpringBootAPI.ECommerce.controllers;
+package dev.SpringBootAPI.ECommerce.controllers.user;
 
 import dev.SpringBootAPI.ECommerce.dtos.user.PhoneDTO;
+import dev.SpringBootAPI.ECommerce.models.user.Phone;
 import dev.SpringBootAPI.ECommerce.services.user.PhoneService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,16 +20,16 @@ public class PhoneController {
     private PhoneService phoneService;
 
     //Create
-    @PutMapping
-    public ResponseEntity<PhoneDTO> createPhone(@Valid @RequestBody PhoneDTO phoneDTO) {
-        return ResponseEntity.ok(phoneService.createPhone(phoneDTO));
+    @PostMapping
+    public ResponseEntity<PhoneDTO> createPhone(@Valid @RequestBody Phone Phone) {
+        return ResponseEntity.ok(phoneService.createPhone(Phone));
     }
     //
 
     //Read
     @GetMapping
-    public ResponseEntity<List<PhoneDTO>> getPhones(@PathVariable UUID id) {
-        List<PhoneDTO> phoneDTOs = phoneService.findAllByUserId(id);
+    public ResponseEntity<List<PhoneDTO>> getPhones(@PathVariable UUID userId) {
+        List<PhoneDTO> phoneDTOs = phoneService.findAllByUserId(userId);
 
         return phoneDTOs.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(phoneDTOs);
     }
@@ -37,8 +38,15 @@ public class PhoneController {
     //Update
     @PutMapping("/{phoneId}")
     public ResponseEntity<PhoneDTO> updatePhone(@PathVariable UUID userId, @PathVariable Long phoneId, @Valid @RequestBody PhoneDTO updatePhone) {
-        Optional<PhoneDTO> existingPhoneDTO = phoneService.findById(phoneId);
-        return existingPhoneDTO.map(phoneDTO -> ResponseEntity.ok(phoneService.updatePhone(phoneDTO, updatePhone)))
+        return phoneService.findById(phoneId)
+                .map(phoneDTO -> ResponseEntity.ok(phoneService.updatePhone(phoneDTO.getId(), updatePhone)))
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @PatchMapping("/confirm/{phoneId}")
+    public ResponseEntity<PhoneDTO> confirmPhone(@PathVariable UUID userId, @PathVariable Long phoneId) {
+        return phoneService.findById(phoneId)
+                .map(phoneDTO -> ResponseEntity.ok(phoneService.confirmPhone(phoneDTO.getId())))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
     //

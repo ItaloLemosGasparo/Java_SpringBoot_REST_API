@@ -21,9 +21,6 @@ public class UserTypeService {
     private UserTypeRepository userTypeRepository;
 
     @Autowired
-    private EntityManager entityManager;
-
-    @Autowired
     private UserTypeMapper userTypeMapper;
 
     //Create
@@ -53,8 +50,6 @@ public class UserTypeService {
 
         if (updatedUserTypeDTO.getDescription() != null)
             existingUserType.setDescription(updatedUserTypeDTO.getDescription());
-
-        entityManager.merge(existingUserType);
 
         return userTypeMapper.toDto(userTypeRepository.save(existingUserType));
     }

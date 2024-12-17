@@ -3,6 +3,7 @@ package dev.SpringBootAPI.ECommerce.controllers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import dev.SpringBootAPI.ECommerce.controllers.user.UserController;
 import dev.SpringBootAPI.ECommerce.dtos.user.UserDTO;
 import dev.SpringBootAPI.ECommerce.exceptions.GlobalExceptionHandler;
 import dev.SpringBootAPI.ECommerce.models.user.User;

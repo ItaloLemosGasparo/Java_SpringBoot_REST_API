@@ -17,17 +17,14 @@ import java.util.stream.Collectors;
 @Service
 public class PhoneService {
     @Autowired
-    PhoneRepository phoneRepository;
+    private PhoneRepository phoneRepository;
 
     @Autowired
-    PhoneMapper phoneMapper;
-
-    @Autowired
-    EntityManager entityManager;
+    private PhoneMapper phoneMapper;
 
     //Create
-    public PhoneDTO createPhone(@Valid PhoneDTO phoneDTO) {
-        return phoneMapper.toDTO(phoneRepository.save(phoneMapper.toEntity(phoneDTO)));
+    public PhoneDTO createPhone(@Valid Phone phone) {
+        return phoneMapper.toDTO(phoneRepository.save(phone));
     }
     //
 
@@ -42,8 +39,8 @@ public class PhoneService {
     //
 
     //Update
-    public PhoneDTO updatePhone(PhoneDTO existingPhoneDTO, PhoneDTO updatePhoneDTO) {
-        Phone existingPhone = phoneMapper.toEntity(existingPhoneDTO);
+    public PhoneDTO updatePhone(Long phoneId, PhoneDTO updatePhoneDTO) {
+        Phone existingPhone = phoneRepository.findById(phoneId).get();
 
         if (updatePhoneDTO.getDdd() != null)
             existingPhone.setDdd(updatePhoneDTO.getDdd());
@@ -51,7 +48,13 @@ public class PhoneService {
         if (updatePhoneDTO.getNumber() != null)
             existingPhone.setNumber(updatePhoneDTO.getNumber());
 
-        entityManager.merge(existingPhone);
+        return phoneMapper.toDTO(phoneRepository.save(existingPhone));
+    }
+
+    public PhoneDTO confirmPhone(Long phoneId) {
+        Phone existingPhone = phoneRepository.findById(phoneId).get();
+
+        existingPhone.setConfirmed(true);
 
         return phoneMapper.toDTO(phoneRepository.save(existingPhone));
     }

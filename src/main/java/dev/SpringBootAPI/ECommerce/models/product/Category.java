@@ -3,15 +3,15 @@ package dev.SpringBootAPI.ECommerce.models.product;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.*;
-
-import java.util.List;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
 @NoArgsConstructor
-@Table(name = "Categories")
+@Table(name = "categories")
 public class Category {
 
     @Id
@@ -23,12 +23,12 @@ public class Category {
     @Column(nullable = false, length = 100)
     private String name;
 
-    @NotNull(message = "The \"iconUrl\" can't be null.")
     @Size(max = 255, message = "The \"iconUrl\" can have 255 characters at maximum.")
-    @Column(nullable = false, length = 255)
+    @Column(length = 255)
     private String iconUrl;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "previous_category_id")  // Define a chave estrangeira no banco de dados
-    private Category previousCategory;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "parent_id")
+    private Category parentCategory;
+
 }

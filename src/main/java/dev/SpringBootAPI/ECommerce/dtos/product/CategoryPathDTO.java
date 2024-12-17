@@ -8,5 +8,5 @@ public class CategoryPathDTO {
 
     private String name;
 
-    private Long previousCategoryID;
+    //private Long parentId;
 }

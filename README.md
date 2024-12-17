@@ -1,68 +1,79 @@
 # E-Commerce API
 
-This project is a RESTful API for an e-commerce application developed in Java using Spring Boot. The API provides
-functionality for managing different types of users, addresses, products, orders, order Itens, with list,
-authentication, and more...
+This project is a RESTful API for an e-commerce application developed in **Java** using **Spring Boot**. It provides
+essential features for managing users, products, orders, addresses, order items, wishlists, and more. The API ensures
+secure authentication and smooth user interaction.
 
 ---
 
 ## 📌 Current Status
 
-This project is under active development. New features and improvements are being added.
+This project is actively under development. New features and improvements are continuously being added.
 
-To do List { <br/>
-
-* Zipode Validation
-* Unit tests (JUnit)
-* Authentication (Spring Security)
-* Logging (slf4j)
-* Swagger (OpenAPI)
-
-<br/> Last but not least: Explode into Microservices.
-<br/> }
+---
 
 ## 🚀 Technologies Used
 
 - **Java 23**
 - **Spring Boot**
-    - Spring Data JPA
-    - Spring Security
-    - Spring Web
-    - DevTools
-- **PostgresSQL** (relational database)
-- **Lombok** (boilerplate reduction)
-- **MapStruct** (object mapping)
-- **Jakarta Validation** (validations)
-- **JWT (JSON Web Token)** (authentication)
-- **Swagger/OpenAPI** (API documentation)
-- **JUnit and Spring Security Test** (testing)
+    - **Spring Data JPA**: Data persistence and database interaction.
+    - **Spring Security**: Authentication and authorization.
+    - **Spring Web**: REST API development.
+    - **DevTools**: Enhanced development experience.
+- **PostgreSQL**: Relational database for data storage.
+- **Lombok**: Reduces boilerplate code.
+- **MapStruct**: Object mapping between DTOs and entities.
+- **Jakarta Validation**: Validation framework for input data.
+- **JWT (JSON Web Token)**: Token-based authentication for secure endpoints.
+- **Swagger/OpenAPI**: Interactive API documentation.
+- **JUnit & Spring Security Test**: Unit testing and security testing.
 
 ---
 
-## 📦 Dependencies
+## 📦 Main Dependencies
 
-### Main Dependencies:
+### Core Dependencies:
 
 - **Spring Boot Starter Web**: For building RESTful APIs.
-- **Spring Boot Starter Data JPA**: For database integration.
-- **PostgreSQL Driver**: For PostgreSQL database connection.
-- **Spring Boot Starter Security**: For authentication and authorization.
-- **JSON Web Token (JWT)**: Token-based security.
+- **Spring Boot Starter Data JPA**: For database integration with **PostgreSQL**.
+- **Spring Boot Starter Security**: For securing the application with **JWT** authentication.
+- **PostgreSQL Driver**: For connecting to the **PostgreSQL** database.
 
 ### Development and Testing:
 
-- **Lombok**: Simplifies code with annotations.
-- **Spring Boot DevTools**: Tools to enhance the development experience.
-- **JUnit and Spring Security Test**: Testing frameworks.
-- **Swagger/OpenAPI**: Interactive API documentation.
+- **Lombok**: For reducing boilerplate code with annotations.
+- **Spring Boot DevTools**: To speed up the development cycle.
+- **JUnit**: Unit testing framework.
+- **Spring Security Test**: For security-related testing.
+- **Swagger/OpenAPI**: Auto-generates interactive API documentation.
 
 ---
 
 ## 🛠️ Features
 
-- **Product Management**: CRUD operations for products.
-- **User Management**: Registration, authentication, and profile handling.
-- **Cart and Orders**: Add products, calculate totals, and finalize orders.
-- **Wish list**: Add products to wish list to remember to look later.
-- **JWT Authentication**: Secure endpoints with token-based authentication.
-- **Custom Validations**: Rules to validate input data.
+- **Product Management**: CRUD operations to manage products in the catalog.
+- **User Management**: User registration, authentication, and profile management.
+- **Cart and Orders**: Users can add products to a cart, calculate totals, and place orders.
+- **Wishlist**: Users can add products to their wishlist for later consideration.
+- **JWT Authentication**: Secure API endpoints with token-based authentication.
+- **Custom Validations**: Validation rules to ensure data integrity and security.
+
+---
+
+## 📈 Next Steps
+
+- Implement **microservices architecture** to scale the application.
+
+---
+
+## 💡 Contributions
+
+Feel free to contribute to the project by opening **issues** or submitting **pull requests**. Please follow the
+contribution guidelines and code of conduct.
+
+---
+
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE).
+

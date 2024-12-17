@@ -1,4 +1,4 @@
-package dev.SpringBootAPI.ECommerce.controllers;
+package dev.SpringBootAPI.ECommerce.controllers.user;
 
 import dev.SpringBootAPI.ECommerce.dtos.user.AddressDTO;
 import dev.SpringBootAPI.ECommerce.models.user.Address;

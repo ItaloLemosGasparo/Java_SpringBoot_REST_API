@@ -40,6 +40,7 @@ public class SecurityConfig {
                 .authenticationProvider(authProvider())
                 .authorizeHttpRequests(authz -> authz
                         .requestMatchers("/api/user/register").permitAll()
+                        .requestMatchers("/api/userType").permitAll()
                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults()) // basic auth (temporarily)

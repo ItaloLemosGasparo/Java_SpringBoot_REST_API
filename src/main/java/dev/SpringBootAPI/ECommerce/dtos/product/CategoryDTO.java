@@ -21,5 +21,5 @@ public class CategoryDTO {
 
     private String iconUrl;
 
-    private Long previousCategoryId;
+    private Long parentId;
 }

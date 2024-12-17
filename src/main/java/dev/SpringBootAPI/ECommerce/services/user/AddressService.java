@@ -18,13 +18,10 @@ import java.util.stream.Collectors;
 @Service
 public class AddressService {
     @Autowired
-    AddressRepository addressRepository;
+    private AddressRepository addressRepository;
 
     @Autowired
-    AddressMapper addressMapper;
-
-    @Autowired
-    EntityManager entityManager;
+    private AddressMapper addressMapper;
 
     //Create
     public AddressDTO createAddress(UUID userId, Address address) {
@@ -64,8 +61,6 @@ public class AddressService {
 
         if (updateAddressDTO.getState() != null)
             existingAddress.setState(updateAddressDTO.getState());
-
-        entityManager.merge(existingAddress);
 
         return addressMapper.toDto(addressRepository.save(existingAddress));
     }

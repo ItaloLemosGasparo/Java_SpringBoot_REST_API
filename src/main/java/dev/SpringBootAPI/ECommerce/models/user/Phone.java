@@ -25,6 +25,7 @@ public class Phone {
 
     private boolean confirmed = false;
 
+    @NotNull(message = "The user id can't be null.")
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;

@@ -24,4 +24,8 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
                     "SELECT id, name, previous_category_id " +
                     "FROM category_path", nativeQuery = true)
     List<Object[]> findCategoryPath(@Param("categoryId") Long categoryId);
+
+    List<Category> findByParentCategoryIsNull();
+
+    List<Category> findByParentCategoryId(Long parentCategoryId);
 }
